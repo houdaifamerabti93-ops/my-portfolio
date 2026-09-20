@@ -10,6 +10,7 @@ import {
   sectionParagraphVariants,
   cardRevealVariants,
 } from '../../lib/scrollAnimations';
+import { triggerHaptic } from '../../lib/haptics';
 
 export const Testimonials: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -25,10 +26,12 @@ export const Testimonials: React.FC = () => {
   }, [isPaused]);
 
   const prevTestimonial = () => {
+    triggerHaptic(10);
     setCurrentIndex((prev) => (prev === 0 ? testimonialsData.length - 1 : prev - 1));
   };
 
   const nextTestimonial = () => {
+    triggerHaptic(10);
     setCurrentIndex((prev) => (prev + 1) % testimonialsData.length);
   };
 
@@ -142,22 +145,30 @@ export const Testimonials: React.FC = () => {
 
                   {/* Navigation Arrows */}
                   <div className="flex items-center gap-2">
-                    <button
+                    <motion.button
                       onClick={prevTestimonial}
+                      whileHover={{ scale: 1.08 }}
+                      whileTap={{ scale: 0.9 }}
+                      transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                      style={{ touchAction: 'manipulation' }}
                       aria-label="Previous testimonial"
                       data-interactive="true"
-                      className="p-3 rounded-full bg-white/5 hover:bg-white/10 text-white/80 hover:text-[#00e5ff] border border-white/10 transition-colors cursor-pointer"
+                      className="min-w-[48px] min-h-[48px] flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 text-white/80 hover:text-[#00e5ff] border border-white/10 transition-colors cursor-pointer"
                     >
                       <ChevronLeft className="w-5 h-5" />
-                    </button>
-                    <button
+                    </motion.button>
+                    <motion.button
                       onClick={nextTestimonial}
+                      whileHover={{ scale: 1.08 }}
+                      whileTap={{ scale: 0.9 }}
+                      transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                      style={{ touchAction: 'manipulation' }}
                       aria-label="Next testimonial"
                       data-interactive="true"
-                      className="p-3 rounded-full bg-white/5 hover:bg-white/10 text-white/80 hover:text-[#00e5ff] border border-white/10 transition-colors cursor-pointer"
+                      className="min-w-[48px] min-h-[48px] flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 text-white/80 hover:text-[#00e5ff] border border-white/10 transition-colors cursor-pointer"
                     >
                       <ChevronRight className="w-5 h-5" />
-                    </button>
+                    </motion.button>
                   </div>
                 </div>
               </motion.div>
@@ -174,14 +185,20 @@ export const Testimonials: React.FC = () => {
           className="flex items-center justify-center gap-2 mt-8"
         >
           {testimonialsData.map((_, idx) => (
-            <button
+            <motion.button
               key={idx}
-              onClick={() => setCurrentIndex(idx)}
+              onClick={() => {
+                triggerHaptic(10);
+                setCurrentIndex(idx);
+              }}
+              whileTap={{ scale: 0.8 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+              style={{ touchAction: 'manipulation' }}
               aria-label={`Go to testimonial ${idx + 1}`}
-              className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+              className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
                 currentIndex === idx
                   ? 'w-8 bg-gradient-to-r from-[#00e5ff] to-[#8b5cf6] shadow-[0_0_8px_#00e5ff]'
-                  : 'w-2 bg-white/20 hover:bg-white/40'
+                  : 'w-2.5 bg-white/20 hover:bg-white/40'
               }`}
             />
           ))}

@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { ContactFormData } from '../../types';
 import { Button } from '../ui/Button';
+import { triggerHaptic } from '../../lib/haptics';
 import {
   premiumEase,
   viewportConfig,
@@ -80,6 +81,9 @@ export const Contact: React.FC = () => {
       setIsSubmitting(false);
       setIsSubmitted(true);
 
+      // Trigger success pattern [10, 30, 10]
+      triggerHaptic([10, 30, 10]);
+
       // Confetti burst
       try {
         confetti({
@@ -95,6 +99,7 @@ export const Contact: React.FC = () => {
   };
 
   const copyToClipboard = () => {
+    triggerHaptic(10);
     navigator.clipboard.writeText(directEmail);
     setCopiedEmail(true);
     setTimeout(() => setCopiedEmail(false), 2500);
@@ -184,24 +189,30 @@ export const Contact: React.FC = () => {
                     {directEmail}
                   </span>
                 </div>
-                <button
+                <motion.button
                   onClick={copyToClipboard}
+                  whileTap={{ scale: 0.92 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                  style={{ touchAction: 'manipulation' }}
                   data-interactive="true"
                   aria-label="Copy email address"
-                  className="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-[#00e5ff] hover:text-[#050510] text-xs font-mono text-white transition-colors flex items-center gap-1.5 shrink-0 cursor-pointer"
+                  className="min-h-[38px] px-3.5 py-1.5 rounded-lg bg-white/10 hover:bg-[#00e5ff] hover:text-[#050510] text-xs font-mono text-white transition-colors flex items-center gap-1.5 shrink-0 cursor-pointer select-none"
                 >
                   {copiedEmail ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                   <span>{copiedEmail ? 'Copied!' : 'Copy'}</span>
-                </button>
+                </motion.button>
               </div>
             </div>
 
             {/* Direct Action Hub: Calendly + WhatsApp */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <a
+              <motion.a
                 href="https://calendly.com"
                 target="_blank"
                 rel="noopener noreferrer"
+                whileTap={{ scale: 0.97 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                style={{ touchAction: 'manipulation' }}
                 data-interactive="true"
                 className="p-5 rounded-2xl bg-gradient-to-br from-white/[0.04] to-white/[0.01] border border-white/[0.08] hover:border-[#8b5cf6]/50 transition-all group block cursor-pointer"
               >
@@ -215,12 +226,15 @@ export const Contact: React.FC = () => {
                 <p className="text-xs text-[#8892b0] mt-1">
                   15-min discovery & technical fit call
                 </p>
-              </a>
+              </motion.a>
 
-              <a
+              <motion.a
                 href="https://wa.me/"
                 target="_blank"
                 rel="noopener noreferrer"
+                whileTap={{ scale: 0.97 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                style={{ touchAction: 'manipulation' }}
                 data-interactive="true"
                 className="p-5 rounded-2xl bg-gradient-to-br from-white/[0.04] to-white/[0.01] border border-white/[0.08] hover:border-emerald-500/50 transition-all group block cursor-pointer"
               >
@@ -234,7 +248,7 @@ export const Contact: React.FC = () => {
                 <p className="text-xs text-[#8892b0] mt-1">
                   Instant text for urgent project quotes
                 </p>
-              </a>
+              </motion.a>
             </div>
 
             {/* Guarantee badge */}

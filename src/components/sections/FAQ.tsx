@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronDown, HelpCircle, MessageSquare } from 'lucide-react';
 import { faqData } from '../../lib/data/faq';
+import { Button } from '../ui/Button';
+import { triggerHaptic } from '../../lib/haptics';
 import {
   premiumEase,
   viewportConfig,
@@ -15,6 +17,7 @@ export const FAQ: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const toggleAccordion = (index: number) => {
+    triggerHaptic(10);
     setOpenIndex(openIndex === index ? null : index);
   };
 
@@ -84,11 +87,14 @@ export const FAQ: React.FC = () => {
                     : 'bg-white/[0.02] border-white/[0.08] hover:border-white/20'
                 }`}
               >
-                <button
+                <motion.button
                   onClick={() => toggleAccordion(index)}
+                  whileTap={{ scale: 0.985 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                  style={{ touchAction: 'manipulation' }}
                   data-interactive="true"
                   aria-expanded={isOpen}
-                  className="w-full py-5 px-6 sm:px-8 text-left flex items-center justify-between gap-4 focus:outline-none cursor-pointer"
+                  className="w-full py-5 px-6 sm:px-8 text-left flex items-center justify-between gap-4 focus:outline-none cursor-pointer select-none"
                 >
                   <span className="font-heading text-base sm:text-lg font-semibold text-white">
                     {item.question}
@@ -102,7 +108,7 @@ export const FAQ: React.FC = () => {
                   >
                     <ChevronDown className="w-4 h-4" />
                   </div>
-                </button>
+                </motion.button>
 
                 <AnimatePresence initial={false}>
                   {isOpen && (
@@ -146,13 +152,13 @@ export const FAQ: React.FC = () => {
             </div>
           </div>
 
-          <a
+          <Button
+            variant="secondary"
+            size="sm"
             href="#contact"
-            data-interactive="true"
-            className="px-5 py-2.5 rounded-full font-heading font-semibold text-xs text-white bg-white/10 hover:bg-white/15 border border-white/15 hover:border-[#00e5ff]/50 transition-all whitespace-nowrap cursor-pointer"
           >
             Ask a Question Directly
-          </a>
+          </Button>
         </motion.div>
       </div>
     </section>

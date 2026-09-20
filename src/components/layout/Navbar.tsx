@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { motion } from 'motion/react';
 import { Menu, X, ArrowUpRight, MessageSquareCode } from 'lucide-react';
 import { Button } from '../ui/Button';
+import { triggerHaptic } from '../../lib/haptics';
 
 interface NavbarProps {
   activeSection: string;
@@ -30,6 +32,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
 
   const scrollToSection = (e: React.MouseEvent<HTMLElement>, href: string) => {
     e.preventDefault();
+    triggerHaptic(10);
     setMobileMenuOpen(false);
     const target = document.querySelector(href);
     if (target) {
@@ -48,37 +51,48 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
     >
       <div className="max-w-7xl mx-auto px-6 sm:px-8 flex items-center justify-between">
         {/* Logo */}
-        <a
+        <motion.a
           href="#hero"
           onClick={(e) => scrollToSection(e, '#hero')}
-          className="group flex items-center gap-1.5 focus:outline-none"
+          whileTap={{ scale: 0.95 }}
+          transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+          className="group flex items-center gap-1.5 focus:outline-none cursor-pointer"
+          style={{ touchAction: 'manipulation' }}
         >
           <span className="font-heading text-xl sm:text-2xl font-bold tracking-tight text-white group-hover:text-[#00e5ff] transition-colors">
             HOUDAIFA
           </span>
           <span className="w-2 h-2 rounded-full bg-[#00e5ff] inline-block shadow-[0_0_8px_#00e5ff] animate-pulse" />
-        </a>
+        </motion.a>
 
         {/* Desktop Navigation Links */}
         <nav className="hidden md:flex items-center gap-1 rounded-full px-4 py-1.5 bg-white/[0.03] border border-white/[0.08] backdrop-blur-md">
           {navLinks.map((link) => {
             const isActive = activeSection === link.id;
             return (
-              <a
+              <motion.a
                 key={link.id}
                 href={link.href}
                 onClick={(e) => scrollToSection(e, link.href)}
-                className={`relative px-4 py-2 text-sm font-medium transition-all duration-200 rounded-full ${
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.94 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                style={{ touchAction: 'manipulation' }}
+                className={`relative px-4 py-2 text-sm font-medium transition-all duration-200 rounded-full cursor-pointer select-none ${
                   isActive
-                    ? 'text-white'
+                    ? 'text-white font-semibold'
                     : 'text-[#8892b0] hover:text-[#eaf2ff] hover:bg-white/[0.04]'
                 }`}
               >
                 {link.label}
                 {isActive && (
-                  <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#00e5ff] shadow-[0_0_6px_#00e5ff]" />
+                  <motion.span
+                    layoutId="activeNavIndicator"
+                    transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+                    className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#00e5ff] shadow-[0_0_8px_#00e5ff]"
+                  />
                 )}
-              </a>
+              </motion.a>
             );
           })}
         </nav>
@@ -98,30 +112,39 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
         </div>
 
         {/* Mobile Hamburger Button */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        <motion.button
+          onClick={() => {
+            triggerHaptic(10);
+            setMobileMenuOpen(!mobileMenuOpen);
+          }}
+          whileTap={{ scale: 0.92 }}
+          transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+          style={{ touchAction: 'manipulation' }}
           aria-label="Toggle navigation menu"
-          className="md:hidden p-2 rounded-xl bg-white/[0.05] border border-white/10 text-white hover:bg-white/10 transition-colors"
+          className="md:hidden min-w-[48px] min-h-[48px] flex items-center justify-center rounded-xl bg-white/[0.05] border border-white/10 text-white hover:bg-white/10 active:bg-white/20 transition-colors cursor-pointer"
         >
           {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
+        </motion.button>
       </div>
 
       {/* Mobile Slide-in Drawer */}
       {mobileMenuOpen && (
         <div className="md:hidden fixed inset-x-0 top-full bg-[#050510]/95 backdrop-blur-2xl border-b border-white/10 py-6 px-6 shadow-2xl flex flex-col gap-4 animate-in slide-in-from-top duration-300">
           {navLinks.map((link) => (
-            <a
+            <motion.a
               key={link.id}
               href={link.href}
               onClick={(e) => scrollToSection(e, link.href)}
-              className="flex items-center justify-between py-3 text-lg font-medium text-[#eaf2ff] hover:text-[#00e5ff] border-b border-white/[0.05] transition-colors"
+              whileTap={{ scale: 0.96 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+              style={{ touchAction: 'manipulation' }}
+              className="flex items-center justify-between py-3 text-lg font-medium text-[#eaf2ff] hover:text-[#00e5ff] border-b border-white/[0.05] transition-colors cursor-pointer select-none"
             >
               <span>{link.label}</span>
               {activeSection === link.id && (
                 <span className="w-2 h-2 rounded-full bg-[#00e5ff] shadow-[0_0_8px_#00e5ff]" />
               )}
-            </a>
+            </motion.a>
           ))}
           <div className="pt-2">
             <Button
@@ -144,3 +167,4 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
     </header>
   );
 };
+

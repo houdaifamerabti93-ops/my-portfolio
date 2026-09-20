@@ -13,6 +13,7 @@ import {
 import { projectsData } from '../../lib/data/projects';
 import { Project } from '../../types';
 import { Button } from '../ui/Button';
+import { triggerHaptic } from '../../lib/haptics';
 import {
   premiumEase,
   viewportConfig,
@@ -298,11 +299,17 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
             {tabs.map((tab) => {
               const isActive = activeTab === tab;
               return (
-                <button
+                <motion.button
                   key={tab}
-                  onClick={() => setActiveTab(tab)}
+                  onClick={() => {
+                    triggerHaptic(10);
+                    setActiveTab(tab);
+                  }}
+                  whileTap={{ scale: 0.93 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                  style={{ touchAction: 'manipulation' }}
                   data-interactive="true"
-                  className={`relative px-5 py-2 rounded-full text-xs font-mono font-medium transition-colors duration-200 cursor-pointer ${
+                  className={`relative min-h-[38px] px-5 py-2 rounded-full text-xs font-mono font-medium transition-colors duration-200 cursor-pointer select-none ${
                     isActive ? 'text-[#050510] font-bold' : 'text-[#8892b0] hover:text-white'
                   }`}
                 >
@@ -315,7 +322,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
                     />
                   )}
                   <span className="relative z-10">{tab}</span>
-                </button>
+                </motion.button>
               );
             })}
           </div>

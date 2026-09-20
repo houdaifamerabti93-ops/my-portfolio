@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { X, ExternalLink, Github, CheckCircle2, TrendingUp, Cpu, Calendar, Tag } from 'lucide-react';
 import { Project } from '../../types';
 import { Button } from './Button';
+import { triggerHaptic } from '../../lib/haptics';
 
 interface ModalProps {
   project: Project | null;
@@ -50,13 +51,20 @@ export const Modal: React.FC<ModalProps> = ({ project, onClose }) => {
           className="relative z-10 w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-3xl bg-[#080816]/95 border border-white/10 shadow-[0_25px_70px_rgba(0,0,0,0.85),0_0_50px_rgba(0,229,255,0.15)] p-6 sm:p-8 md:p-10 my-auto text-[#eaf2ff]"
         >
           {/* Close button */}
-          <button
-            onClick={onClose}
+          <motion.button
+            onClick={() => {
+              triggerHaptic(10);
+              onClose();
+            }}
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.9 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+            style={{ touchAction: 'manipulation' }}
             aria-label="Close modal"
-            className="absolute top-5 right-5 p-2.5 rounded-full bg-white/5 hover:bg-white/10 text-white/70 hover:text-white border border-white/10 transition-colors z-20 cursor-pointer"
+            className="absolute top-5 right-5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 text-white/70 hover:text-white border border-white/10 transition-colors z-20 cursor-pointer select-none"
           >
             <X className="w-5 h-5" />
-          </button>
+          </motion.button>
 
           {/* Full-size Project Image with Banner Overlay */}
           <div className="relative rounded-2xl overflow-hidden mb-8 border border-white/10 min-h-64 sm:h-80 md:h-96 group bg-[#0a0a1a]">

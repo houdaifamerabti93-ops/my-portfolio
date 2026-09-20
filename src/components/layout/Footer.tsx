@@ -3,9 +3,11 @@ import { motion } from 'motion/react';
 import { Github, Twitter, Linkedin, Dribbble, ArrowUp, Mail, MapPin, Sparkles } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { premiumEase, viewportConfig } from '../../lib/scrollAnimations';
+import { triggerHaptic } from '../../lib/haptics';
 
 export const Footer: React.FC = () => {
   const scrollToTop = () => {
+    triggerHaptic(10);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -103,17 +105,22 @@ export const Footer: React.FC = () => {
               ].map((social, i) => {
                 const Icon = social.icon;
                 return (
-                  <a
+                  <motion.a
                     key={i}
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => triggerHaptic(10)}
+                    whileHover={{ scale: 1.1, y: -2 }}
+                    whileTap={{ scale: 0.88 }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                    style={{ touchAction: 'manipulation' }}
                     aria-label={social.label}
                     data-interactive="true"
-                    className="p-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white/70 hover:text-[#00e5ff] hover:border-[#00e5ff]/40 hover:shadow-[0_0_15px_rgba(0,229,255,0.3)] transition-all cursor-pointer"
+                    className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl bg-white/[0.04] border border-white/[0.08] text-white/70 hover:text-[#00e5ff] hover:border-[#00e5ff]/40 hover:shadow-[0_0_15px_rgba(0,229,255,0.3)] transition-colors cursor-pointer"
                   >
                     <Icon className="w-4 h-4" />
-                  </a>
+                  </motion.a>
                 );
               })}
             </div>
