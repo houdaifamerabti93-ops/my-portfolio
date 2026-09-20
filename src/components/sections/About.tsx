@@ -87,7 +87,8 @@ export const About: React.FC = () => {
     const cvContent = `=====================================================
 HOUDAIFA — FULL-STACK DEVELOPER & CREATIVE CODER
 =====================================================
-Email: abdrhmanemerabti512@gmail.com
+Email: houdaifamerabti93@gmail.com
+Phone/WhatsApp: +213773018738
 Status: Available for Full-Stack, Contract & Bespoke 3D Web Projects
 Portfolio: https://houdaifa.dev
 
