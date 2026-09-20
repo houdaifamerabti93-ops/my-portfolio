@@ -18,6 +18,7 @@ import { FAQ } from './components/sections/FAQ';
 import { Contact } from './components/sections/Contact';
 import { Modal } from './components/ui/Modal';
 import { Project, PricingTier } from './types';
+import { Analytics } from '@vercel/analytics/react';
 
 export default function App() {
   const [loading, setLoading] = useState(true);
@@ -136,6 +137,9 @@ export default function App() {
 
       {/* Case Study Modal */}
       <Modal project={selectedProject} onClose={() => setSelectedProject(null)} />
+
+      {/* Vercel Web Analytics */}
+      <Analytics />
     </div>
   );
 }
