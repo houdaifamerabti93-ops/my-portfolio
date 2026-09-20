@@ -2,6 +2,7 @@ import React from 'react';
 import { Check, Sparkles, Zap, ArrowRight } from 'lucide-react';
 import { pricingTiers } from '../../lib/data/pricing';
 import { PricingTier } from '../../types';
+import { Button } from '../ui/Button';
 
 interface PricingProps {
   onSelectTier?: (tier: PricingTier) => void;
@@ -110,18 +111,16 @@ export const Pricing: React.FC<PricingProps> = ({ onSelectTier }) => {
                 </div>
 
                 {/* CTA Button */}
-                <button
+                <Button
+                  variant={isPopular ? 'primary' : 'secondary'}
+                  size="md"
+                  fullWidth
                   onClick={() => handleSelect(tier)}
-                  data-interactive="true"
-                  className={`w-full py-4 rounded-full font-heading font-semibold text-sm tracking-wide transition-all duration-300 flex items-center justify-center gap-2 ${
-                    isPopular
-                      ? 'bg-gradient-to-r from-[#00e5ff] via-[#8b5cf6] to-[#ff2d95] text-[#050510] shadow-[0_0_25px_rgba(0,229,255,0.4)] hover:shadow-[0_0_40px_rgba(0,229,255,0.7)]'
-                      : 'bg-white/5 hover:bg-white/10 text-white border border-white/15 hover:border-[#00e5ff]/50'
-                  }`}
+                  icon={<ArrowRight className="w-4 h-4" />}
+                  iconPosition="right"
                 >
-                  <span>{tier.ctaText}</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
+                  {tier.ctaText}
+                </Button>
               </div>
             );
           })}

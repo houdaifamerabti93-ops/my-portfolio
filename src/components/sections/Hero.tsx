@@ -2,13 +2,11 @@ import React from 'react';
 import { ArrowDown, ArrowUpRight, Sparkles, Terminal } from 'lucide-react';
 import { Hero3DScene } from '../3d/Hero3DScene';
 import { useTextScramble } from '../../hooks/useTextScramble';
-import { useMagnetic } from '../../hooks/useMagnetic';
+import { Button } from '../ui/Button';
 
 export const Hero: React.FC = () => {
-  const headline = 'I build fast, modern web experiences.';
+  const headline = 'Crafting Digital Experiences.';
   const { displayText, scramble } = useTextScramble(headline, 30);
-  const magneticWorkRef = useMagnetic(0.2);
-  const magneticHireRef = useMagnetic(0.2);
 
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
@@ -55,25 +53,25 @@ export const Hero: React.FC = () => {
 
         {/* Action CTAs */}
         <div className="flex flex-col sm:flex-row items-center gap-4 mb-16">
-          <button
-            ref={magneticWorkRef as React.RefObject<HTMLButtonElement>}
+          <Button
+            variant="primary"
+            size="lg"
             onClick={() => scrollTo('projects')}
-            data-interactive="true"
-            className="w-full sm:w-auto px-8 py-4 rounded-full font-heading font-semibold text-sm tracking-wide text-[#050510] bg-gradient-to-r from-[#00e5ff] via-[#8b5cf6] to-[#ff2d95] shadow-[0_0_30px_rgba(0,229,255,0.4)] hover:shadow-[0_0_45px_rgba(0,229,255,0.7)] transition-all flex items-center justify-center gap-2"
+            icon={<ArrowUpRight className="w-4 h-4" />}
+            iconPosition="right"
           >
-            <span>View Work</span>
-            <ArrowUpRight className="w-4 h-4" />
-          </button>
+            View Work
+          </Button>
 
-          <button
-            ref={magneticHireRef as React.RefObject<HTMLButtonElement>}
+          <Button
+            variant="secondary"
+            size="lg"
             onClick={() => scrollTo('contact')}
-            data-interactive="true"
-            className="w-full sm:w-auto px-8 py-4 rounded-full font-heading font-semibold text-sm tracking-wide text-white bg-white/[0.05] hover:bg-white/[0.1] border border-white/15 hover:border-[#00e5ff]/50 transition-all flex items-center justify-center gap-2 backdrop-blur-md"
+            icon={<Sparkles className="w-4 h-4 text-[#00e5ff]" />}
+            iconPosition="left"
           >
-            <Sparkles className="w-4 h-4 text-[#00e5ff]" />
-            <span>Hire Me</span>
-          </button>
+            Hire Me
+          </Button>
         </div>
 
         {/* Tech Badges / Micro Terminal Pill */}

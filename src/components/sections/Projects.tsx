@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { projectsData } from '../../lib/data/projects';
 import { Project } from '../../types';
+import { Button } from '../ui/Button';
 
 interface ProjectsProps {
   onSelectProject: (project: Project) => void;
@@ -104,29 +105,31 @@ const ProjectCard: React.FC<{
 
           {/* Hidden on default, appears on hover: Two buttons "Live →" + "GitHub" */}
           <div className="absolute inset-0 bg-[#050510]/60 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3 z-20 pointer-events-none group-hover:pointer-events-auto">
-            <a
+            <Button
+              variant="primary"
+              size="sm"
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
-              data-interactive="true"
-              className="px-5 py-2.5 rounded-full bg-gradient-to-r from-[#00e5ff] to-[#38bdf8] text-[#050510] font-semibold text-xs font-mono flex items-center gap-1.5 shadow-[0_0_20px_rgba(0,229,255,0.6)] hover:scale-105 transition-transform"
+              icon={<ArrowRight className="w-3.5 h-3.5" />}
+              iconPosition="right"
             >
-              <span>Live</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </a>
+              Live
+            </Button>
 
-            <a
+            <Button
+              variant="secondary"
+              size="sm"
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
-              data-interactive="true"
-              className="px-5 py-2.5 rounded-full bg-[#050510]/90 border border-white/20 text-white hover:text-[#8b5cf6] hover:border-[#8b5cf6]/60 font-medium text-xs font-mono flex items-center gap-1.5 transition-all hover:scale-105"
+              icon={<Github className="w-3.5 h-3.5" />}
+              iconPosition="left"
             >
-              <Github className="w-3.5 h-3.5" />
-              <span>GitHub</span>
-            </a>
+              GitHub
+            </Button>
           </div>
         </div>
 

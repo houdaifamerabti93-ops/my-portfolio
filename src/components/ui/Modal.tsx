@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, ExternalLink, Github, CheckCircle2, TrendingUp, Cpu, Calendar, Tag } from 'lucide-react';
 import { Project } from '../../types';
+import { Button } from './Button';
 
 interface ModalProps {
   project: Project | null;
@@ -94,24 +95,28 @@ export const Modal: React.FC<ModalProps> = ({ project, onClose }) => {
 
               {/* Action Links (Live + GitHub) */}
               <div className="flex items-center gap-3">
-                <a
+                <Button
+                  variant="primary"
+                  size="sm"
                   href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#00e5ff] to-[#38bdf8] text-[#050510] font-semibold text-sm hover:shadow-[0_0_20px_rgba(0,229,255,0.5)] hover:scale-105 transition-all"
+                  icon={<ExternalLink className="w-4 h-4" />}
+                  iconPosition="left"
                 >
-                  <ExternalLink className="w-4 h-4" />
-                  <span>Live Preview</span>
-                </a>
-                <a
+                  Live Preview
+                </Button>
+                <Button
+                  variant="secondary"
+                  size="sm"
                   href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/15 text-white border border-white/15 text-sm font-medium hover:scale-105 transition-all"
+                  icon={<Github className="w-4 h-4" />}
+                  iconPosition="left"
                 >
-                  <Github className="w-4 h-4" />
-                  <span>GitHub</span>
-                </a>
+                  GitHub
+                </Button>
               </div>
             </div>
           </div>

@@ -13,6 +13,7 @@ import {
   ExternalLink 
 } from 'lucide-react';
 import { ContactFormData } from '../../types';
+import { Button } from '../ui/Button';
 
 export const Contact: React.FC = () => {
   const [formData, setFormData] = useState<ContactFormData>({
@@ -224,7 +225,9 @@ export const Contact: React.FC = () => {
                       Thank you, <span className="text-white font-semibold">{formData.name}</span>. I have received your message regarding {formData.projectType} and will be in touch shortly.
                     </p>
                   </div>
-                  <button
+                  <Button
+                    variant="secondary"
+                    size="md"
                     onClick={() => {
                       setIsSubmitted(false);
                       setFormData({
@@ -235,10 +238,9 @@ export const Contact: React.FC = () => {
                         message: '',
                       });
                     }}
-                    className="px-6 py-2.5 rounded-full bg-white/10 hover:bg-white/15 text-white text-xs font-mono transition-colors"
                   >
                     Send Another Message
-                  </button>
+                  </Button>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -347,24 +349,17 @@ export const Contact: React.FC = () => {
                   </div>
 
                   {/* Submit Button */}
-                  <button
+                  <Button
                     type="submit"
-                    disabled={isSubmitting}
-                    data-interactive="true"
-                    className="w-full py-4 rounded-full font-heading font-semibold text-sm tracking-wide text-[#050510] bg-gradient-to-r from-[#00e5ff] via-[#8b5cf6] to-[#ff2d95] hover:shadow-[0_0_30px_rgba(0,229,255,0.5)] transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
+                    variant="primary"
+                    size="lg"
+                    fullWidth
+                    loading={isSubmitting}
+                    icon={<Send className="w-4 h-4" />}
+                    iconPosition="right"
                   >
-                    {isSubmitting ? (
-                      <span className="flex items-center gap-2">
-                        <span className="w-4 h-4 rounded-full border-2 border-[#050510] border-t-transparent animate-spin" />
-                        <span>Transmitting Inquiry...</span>
-                      </span>
-                    ) : (
-                      <>
-                        <span>Submit Project Proposal</span>
-                        <Send className="w-4 h-4" />
-                      </>
-                    )}
-                  </button>
+                    Submit Project Proposal
+                  </Button>
                 </form>
               )}
             </div>

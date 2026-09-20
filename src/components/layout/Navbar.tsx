@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ArrowUpRight, MessageSquareCode } from 'lucide-react';
-import { useMagnetic } from '../../hooks/useMagnetic';
+import { Button } from '../ui/Button';
 
 interface NavbarProps {
   activeSection: string;
@@ -9,7 +9,6 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const magneticButtonRef = useMagnetic(0.25);
 
   const navLinks = [
     { label: 'About', href: '#about', id: 'about' },
@@ -29,7 +28,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const scrollToSection = (e: React.MouseEvent<HTMLElement>, href: string) => {
     e.preventDefault();
     setMobileMenuOpen(false);
     const target = document.querySelector(href);
@@ -86,16 +85,16 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
 
         {/* Desktop CTA Button */}
         <div className="hidden md:block">
-          <a
-            ref={magneticButtonRef as React.RefObject<HTMLAnchorElement>}
+          <Button
+            variant="primary"
+            size="sm"
             href="#contact"
             onClick={(e) => scrollToSection(e, '#contact')}
-            data-interactive="true"
-            className="group relative inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold text-[#050510] bg-gradient-to-r from-[#00e5ff] via-[#8b5cf6] to-[#ff2d95] hover:shadow-[0_0_25px_rgba(0,229,255,0.6)] transition-all duration-300"
+            icon={<ArrowUpRight className="w-4 h-4" />}
+            iconPosition="right"
           >
-            <span>Let's Talk</span>
-            <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </a>
+            Let's Talk
+          </Button>
         </div>
 
         {/* Mobile Hamburger Button */}
@@ -124,14 +123,22 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
               )}
             </a>
           ))}
-          <a
-            href="#contact"
-            onClick={(e) => scrollToSection(e, '#contact')}
-            className="mt-2 flex items-center justify-center gap-2 w-full py-3 rounded-xl font-semibold text-[#050510] bg-gradient-to-r from-[#00e5ff] to-[#8b5cf6]"
-          >
-            <MessageSquareCode className="w-5 h-5" />
-            <span>Let's Talk</span>
-          </a>
+          <div className="pt-2">
+            <Button
+              variant="primary"
+              size="md"
+              fullWidth
+              href="#contact"
+              onClick={(e) => {
+                setMobileMenuOpen(false);
+                scrollToSection(e, '#contact');
+              }}
+              icon={<MessageSquareCode className="w-5 h-5" />}
+              iconPosition="left"
+            >
+              Let's Talk
+            </Button>
+          </div>
         </div>
       )}
     </header>

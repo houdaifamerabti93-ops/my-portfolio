@@ -14,6 +14,7 @@ import {
   Clock 
 } from 'lucide-react';
 import { TiltCard } from '../ui/TiltCard';
+import { Button } from '../ui/Button';
 
 interface AnimatedCounterProps {
   value: number;
@@ -311,24 +312,26 @@ Calendly: 15-minute introductory technical discovery call available
               {/* Two CTAs: "Download CV" (primary) + "Let's Talk" (secondary) */}
               <div className="flex flex-wrap items-center gap-4 pt-2">
                 {/* Primary CTA: Download CV */}
-                <button
+                <Button
+                  variant="primary"
+                  size="md"
                   onClick={handleDownloadCV}
-                  data-interactive="true"
-                  className="px-7 py-3.5 rounded-full font-heading font-semibold text-sm text-[#050510] bg-gradient-to-r from-[#00e5ff] via-[#38bdf8] to-[#8b5cf6] hover:shadow-[0_0_30px_rgba(0,229,255,0.5)] transition-all duration-300 inline-flex items-center gap-2 cursor-pointer active:scale-95"
+                  icon={<Download className="w-4 h-4" />}
+                  iconPosition="left"
                 >
-                  <Download className="w-4 h-4" />
-                  <span>Download CV</span>
-                </button>
+                  Download CV
+                </Button>
 
                 {/* Secondary CTA: Let's Talk */}
-                <button
+                <Button
+                  variant="secondary"
+                  size="md"
                   onClick={scrollToContact}
-                  data-interactive="true"
-                  className="px-7 py-3.5 rounded-full font-heading font-semibold text-sm text-white bg-white/[0.04] hover:bg-white/[0.1] border border-white/15 hover:border-[#00e5ff]/50 hover:shadow-[0_0_20px_rgba(0,229,255,0.2)] transition-all duration-300 inline-flex items-center gap-2 cursor-pointer active:scale-95"
+                  icon={<ArrowUpRight className="w-4 h-4 text-[#00e5ff]" />}
+                  iconPosition="right"
                 >
-                  <span>Let's Talk</span>
-                  <ArrowUpRight className="w-4 h-4 text-[#00e5ff]" />
-                </button>
+                  Let's Talk
+                </Button>
               </div>
             </motion.div>
           </div>

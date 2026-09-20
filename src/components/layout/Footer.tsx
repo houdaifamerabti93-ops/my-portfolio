@@ -1,5 +1,6 @@
 import React from 'react';
 import { Github, Twitter, Linkedin, Dribbble, ArrowUp, Mail, MapPin, Sparkles } from 'lucide-react';
+import { Button } from '../ui/Button';
 
 export const Footer: React.FC = () => {
   const scrollToTop = () => {
@@ -119,14 +120,16 @@ export const Footer: React.FC = () => {
             <span>using Next.js 14, Three.js & Tailwind CSS.</span>
           </div>
 
-          <button
+          <Button
+            variant="secondary"
+            size="sm"
             onClick={scrollToTop}
             aria-label="Back to top"
-            className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-white/80 hover:text-white border border-white/10 transition-colors"
+            icon={<ArrowUp className="w-3.5 h-3.5" />}
+            iconPosition="right"
           >
-            <span>Back to top</span>
-            <ArrowUp className="w-3.5 h-3.5" />
-          </button>
+            Back to top
+          </Button>
         </div>
       </div>
     </footer>
