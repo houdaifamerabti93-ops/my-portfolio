@@ -318,6 +318,7 @@ Calendly: 15-minute introductory technical discovery call available
                   onClick={handleDownloadCV}
                   icon={<Download className="w-4 h-4" />}
                   iconPosition="left"
+                  iconAnimation="bounce"
                 >
                   Download CV
                 </Button>
@@ -329,6 +330,7 @@ Calendly: 15-minute introductory technical discovery call available
                   onClick={scrollToContact}
                   icon={<ArrowUpRight className="w-4 h-4 text-[#00e5ff]" />}
                   iconPosition="right"
+                  iconAnimation="arrow"
                 >
                   Let's Talk
                 </Button>

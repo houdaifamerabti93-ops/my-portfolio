@@ -1,34 +1,66 @@
 import { useEffect, useRef } from 'react';
+import { useMotionValue, useSpring, MotionValue } from 'motion/react';
+
+export interface UseMagneticOptions {
+  enabled?: boolean;
+  strength?: number;
+  radius?: number;
+}
+
+export interface UseMagneticReturn<T extends HTMLElement> {
+  ref: React.RefObject<T | null>;
+  x: MotionValue<number>;
+  y: MotionValue<number>;
+  reset: () => void;
+}
 
 /**
  * useMagnetic Hook
- * Creates an Awwwards-level interactive magnetic attraction effect.
- * When the user's cursor approaches within proximityRadius or moves over the element,
- * the element is pulled smoothly toward the cursor with spring physics.
+ * Awwwards-grade interactive magnetic attraction effect powered by Framer Motion.
  * 
  * Features:
- * - GPU accelerated translate3d
- * - Automatically disabled on touch/coarse devices
- * - Spring physics release on mouse leave
- * - Configurable magnetic strength and activation radius
+ * - When cursor enters within 60px radius of the button, the button starts following the cursor
+ * - Strength: 0.3 (subtle, perfectly weighted)
+ * - Returns to original position with spring physics (stiffness: 150, damping: 15)
+ * - Uses useMotionValue and useSpring for 100% GPU-accelerated transforms
+ * - Automatically disabled on mobile/touch devices via window.matchMedia('(hover: hover)')
  */
 export function useMagnetic<T extends HTMLElement = HTMLElement>(
-  strength: number = 0.35,
-  proximityRadius: number = 50
-) {
+  enabledOrOptions: boolean | UseMagneticOptions = true,
+  strengthArg: number = 0.3,
+  radiusArg: number = 60
+): UseMagneticReturn<T> {
+  const options: UseMagneticOptions = typeof enabledOrOptions === 'boolean'
+    ? { enabled: enabledOrOptions, strength: strengthArg, radius: radiusArg }
+    : { enabled: true, strength: 0.3, radius: 60, ...enabledOrOptions };
+
+  const { enabled = true, strength = 0.3, radius = 60 } = options;
+
   const ref = useRef<T | null>(null);
 
+  // Raw cursor delta motion values
+  const rawX = useMotionValue(0);
+  const rawY = useMotionValue(0);
+
+  // Smooth return physics with requested spring constants (stiffness: 150, damping: 15)
+  const springConfig = { stiffness: 150, damping: 15 };
+  const x = useSpring(rawX, springConfig);
+  const y = useSpring(rawY, springConfig);
+
+  const reset = () => {
+    rawX.set(0);
+    rawY.set(0);
+  };
+
   useEffect(() => {
+    if (!enabled || typeof window === 'undefined') return;
+
+    // Check device support: disable on touch/mobile devices
+    const hasHoverCapability = window.matchMedia('(hover: hover)').matches;
+    if (!hasHoverCapability) return;
+
     const element = ref.current;
     if (!element) return;
-
-    // Do not apply magnetic physics on touch / mobile devices
-    if (typeof window === 'undefined' || window.matchMedia('(pointer: coarse)').matches) {
-      return;
-    }
-
-    let isHovering = false;
-    let animationFrameId: number;
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = element.getBoundingClientRect();
@@ -39,49 +71,33 @@ export function useMagnetic<T extends HTMLElement = HTMLElement>(
       const distY = e.clientY - centerY;
       const distance = Math.hypot(distX, distY);
 
-      // Check if mouse is within proximity boundary
-      const maxDistance = Math.max(rect.width, rect.height) / 2 + proximityRadius;
+      // Trigger boundary: within 60px radius beyond button boundary
+      const maxDistance = Math.max(rect.width, rect.height) / 2 + radius;
 
       if (distance < maxDistance) {
-        isHovering = true;
-        const pull = 1 - Math.min(distance / maxDistance, 1);
-        const deltaX = distX * strength * (0.6 + pull * 0.4);
-        const deltaY = distY * strength * (0.6 + pull * 0.4);
-
-        cancelAnimationFrame(animationFrameId);
-        animationFrameId = requestAnimationFrame(() => {
-          element.style.transform = `translate3d(${deltaX.toFixed(2)}px, ${deltaY.toFixed(2)}px, 0)`;
-          element.style.transition = 'transform 0.12s cubic-bezier(0.2, 0, 0.2, 1)';
-        });
-      } else if (isHovering) {
-        // Reset when moving outside the proximity zone
-        isHovering = false;
-        cancelAnimationFrame(animationFrameId);
-        element.style.transform = 'translate3d(0, 0, 0)';
-        element.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+        // Magnetic attraction: pull smoothly toward cursor with requested strength
+        rawX.set(distX * strength);
+        rawY.set(distY * strength);
+      } else {
+        // Outside proximity zone - spring smoothly back to 0
+        rawX.set(0);
+        rawY.set(0);
       }
     };
 
     const handleMouseLeave = () => {
-      isHovering = false;
-      cancelAnimationFrame(animationFrameId);
-      element.style.transform = 'translate3d(0, 0, 0)';
-      element.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+      reset();
     };
 
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
     element.addEventListener('mouseleave', handleMouseLeave);
 
     return () => {
-      cancelAnimationFrame(animationFrameId);
       window.removeEventListener('mousemove', handleMouseMove);
       element.removeEventListener('mouseleave', handleMouseLeave);
-      if (element) {
-        element.style.transform = '';
-        element.style.transition = '';
-      }
+      reset();
     };
-  }, [strength, proximityRadius]);
+  }, [enabled, strength, radius, rawX, rawY]);
 
-  return ref;
+  return { ref, x, y, reset };
 }

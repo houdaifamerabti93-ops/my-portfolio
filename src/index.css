@@ -197,6 +197,19 @@ code, pre, .font-mono {
   animation: button-idle-glow 3s ease-in-out infinite;
 }
 
+@keyframes button-idle-glow-secondary {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.25), 0 0 10px rgba(0, 229, 255, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(139, 92, 246, 0.45), 0 0 18px rgba(0, 229, 255, 0.2);
+  }
+}
+
+.animate-button-idle-glow-secondary {
+  animation: button-idle-glow-secondary 3s ease-in-out infinite;
+}
+
 .animate-button-gradient-shift {
   background-size: 250% 250%;
   animation: button-gradient-shift 6s ease infinite;
