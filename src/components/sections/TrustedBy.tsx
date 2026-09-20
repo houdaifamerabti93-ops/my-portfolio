@@ -1,20 +1,48 @@
 import React from 'react';
+import { motion } from 'motion/react';
 import { trustedClients } from '../../lib/data/skills';
+import { 
+  premiumEase, 
+  viewportConfig, 
+  sectionLabelVariants, 
+  dividerRevealVariants 
+} from '../../lib/scrollAnimations';
 
 export const TrustedBy: React.FC = () => {
   // Duplicate for seamless infinite marquee loop
   const marqueeItems = [...trustedClients, ...trustedClients, ...trustedClients];
 
   return (
-    <section id="trusted" className="py-16 border-y border-white/[0.06] bg-[#050510]/60 overflow-hidden relative">
+    <section id="trusted" className="py-16 bg-[#050510]/60 overflow-hidden relative">
+      {/* Top Divider (ScaleX from left) */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportConfig}
+        variants={dividerRevealVariants}
+        className="absolute top-0 left-0 right-0 h-[1px] bg-white/[0.08]"
+      />
+
       <div className="max-w-7xl mx-auto px-6 sm:px-8 mb-8 text-center">
-        <p className="text-xs font-mono uppercase tracking-widest text-[#8892b0]">
+        <motion.p
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+          variants={sectionLabelVariants}
+          className="text-xs font-mono uppercase tracking-widest text-[#8892b0]"
+        >
           Trusted by high-growth startups, scale-ups & venture-backed products
-        </p>
+        </motion.p>
       </div>
 
-      {/* Infinite Marquee Track */}
-      <div className="relative w-full overflow-hidden mask-gradient">
+      {/* Infinite Marquee Track with Entrance Reveal */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={viewportConfig}
+        transition={{ duration: 0.8, ease: premiumEase }}
+        className="relative w-full overflow-hidden mask-gradient"
+      >
         {/* Soft edge fade masks */}
         <div className="absolute left-0 top-0 bottom-0 w-24 sm:w-36 bg-gradient-to-r from-[#050510] to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-24 sm:w-36 bg-gradient-to-l from-[#050510] to-transparent z-10 pointer-events-none" />
@@ -39,7 +67,16 @@ export const TrustedBy: React.FC = () => {
             </div>
           ))}
         </div>
-      </div>
+      </motion.div>
+
+      {/* Bottom Divider (ScaleX from left) */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportConfig}
+        variants={dividerRevealVariants}
+        className="absolute bottom-0 left-0 right-0 h-[1px] bg-white/[0.08]"
+      />
     </section>
   );
 };

@@ -1,6 +1,15 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { ChevronDown, HelpCircle, MessageSquare } from 'lucide-react';
 import { faqData } from '../../lib/data/faq';
+import {
+  premiumEase,
+  viewportConfig,
+  sectionLabelVariants,
+  sectionHeadingVariants,
+  sectionParagraphVariants,
+  cardRevealVariants,
+} from '../../lib/scrollAnimations';
 
 export const FAQ: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -14,19 +23,37 @@ export const FAQ: React.FC = () => {
       <div className="max-w-4xl mx-auto px-6 sm:px-8">
         {/* Section Header */}
         <div className="text-center max-w-xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 mb-3">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
+            variants={sectionLabelVariants}
+            className="inline-flex items-center gap-2 mb-3"
+          >
             <span className="w-6 h-[1px] bg-[#00e5ff]" />
             <span className="text-xs font-mono tracking-widest text-[#00e5ff] uppercase">
               08 / Common Inquiries
             </span>
             <span className="w-6 h-[1px] bg-[#00e5ff]" />
-          </div>
-          <h2 className="font-heading text-3xl sm:text-5xl font-bold tracking-tight text-white mb-4">
+          </motion.div>
+          <motion.h2
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
+            variants={sectionHeadingVariants}
+            className="font-heading text-3xl sm:text-5xl font-bold tracking-tight text-white mb-4"
+          >
             Frequently asked questions.
-          </h2>
-          <p className="text-sm sm:text-base text-[#8892b0]">
+          </motion.h2>
+          <motion.p
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
+            variants={sectionParagraphVariants}
+            className="text-sm sm:text-base text-[#8892b0]"
+          >
             Everything you need to know about working together, communication cadences, and development standards.
-          </p>
+          </motion.p>
         </div>
 
         {/* FAQ Accordion List */}
@@ -34,8 +61,23 @@ export const FAQ: React.FC = () => {
           {faqData.map((item, index) => {
             const isOpen = openIndex === index;
             return (
-              <div
+              <motion.div
                 key={index}
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewportConfig}
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: {
+                      duration: 0.6,
+                      delay: index * 0.08,
+                      ease: premiumEase,
+                    },
+                  },
+                }}
                 className={`rounded-2xl border transition-all duration-300 overflow-hidden ${
                   isOpen
                     ? 'bg-white/[0.04] border-[#00e5ff]/40 shadow-[0_10px_30px_rgba(0,0,0,0.4),0_0_20px_rgba(0,229,255,0.08)]'
@@ -46,7 +88,7 @@ export const FAQ: React.FC = () => {
                   onClick={() => toggleAccordion(index)}
                   data-interactive="true"
                   aria-expanded={isOpen}
-                  className="w-full py-5 px-6 sm:px-8 text-left flex items-center justify-between gap-4 focus:outline-none"
+                  className="w-full py-5 px-6 sm:px-8 text-left flex items-center justify-between gap-4 focus:outline-none cursor-pointer"
                 >
                   <span className="font-heading text-base sm:text-lg font-semibold text-white">
                     {item.question}
@@ -62,18 +104,34 @@ export const FAQ: React.FC = () => {
                   </div>
                 </button>
 
-                {isOpen && (
-                  <div className="px-6 sm:px-8 pb-6 pt-1 text-sm sm:text-base text-[#8892b0] leading-relaxed border-t border-white/[0.04]">
-                    {item.answer}
-                  </div>
-                )}
-              </div>
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.35, ease: premiumEase }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-6 sm:px-8 pb-6 pt-1 text-sm sm:text-base text-[#8892b0] leading-relaxed border-t border-white/[0.04]">
+                        {item.answer}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
             );
           })}
         </div>
 
         {/* Still have questions prompt */}
-        <div className="mt-12 text-center p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+          variants={cardRevealVariants}
+          className="mt-12 text-center p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4"
+        >
           <div className="flex items-center gap-3 text-left">
             <div className="w-10 h-10 rounded-xl bg-[#00e5ff]/10 text-[#00e5ff] flex items-center justify-center shrink-0">
               <MessageSquare className="w-5 h-5" />
@@ -91,11 +149,11 @@ export const FAQ: React.FC = () => {
           <a
             href="#contact"
             data-interactive="true"
-            className="px-5 py-2.5 rounded-full font-heading font-semibold text-xs text-white bg-white/10 hover:bg-white/15 border border-white/15 hover:border-[#00e5ff]/50 transition-all whitespace-nowrap"
+            className="px-5 py-2.5 rounded-full font-heading font-semibold text-xs text-white bg-white/10 hover:bg-white/15 border border-white/15 hover:border-[#00e5ff]/50 transition-all whitespace-nowrap cursor-pointer"
           >
             Ask a Question Directly
           </a>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

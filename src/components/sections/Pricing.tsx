@@ -1,8 +1,17 @@
 import React from 'react';
+import { motion } from 'motion/react';
 import { Check, Sparkles, Zap, ArrowRight } from 'lucide-react';
 import { pricingTiers } from '../../lib/data/pricing';
 import { PricingTier } from '../../types';
 import { Button } from '../ui/Button';
+import {
+  premiumEase,
+  viewportConfig,
+  sectionLabelVariants,
+  sectionHeadingVariants,
+  sectionParagraphVariants,
+  cardRevealVariants,
+} from '../../lib/scrollAnimations';
 
 interface PricingProps {
   onSelectTier?: (tier: PricingTier) => void;
@@ -31,28 +40,60 @@ export const Pricing: React.FC<PricingProps> = ({ onSelectTier }) => {
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 mb-3">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
+            variants={sectionLabelVariants}
+            className="inline-flex items-center gap-2 mb-3"
+          >
             <span className="w-6 h-[1px] bg-[#8b5cf6]" />
             <span className="text-xs font-mono tracking-widest text-[#8b5cf6] uppercase">
               07 / Investment Tiers
             </span>
             <span className="w-6 h-[1px] bg-[#8b5cf6]" />
-          </div>
-          <h2 className="font-heading text-3xl sm:text-5xl font-bold tracking-tight text-white mb-4">
+          </motion.div>
+          <motion.h2
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
+            variants={sectionHeadingVariants}
+            className="font-heading text-3xl sm:text-5xl font-bold tracking-tight text-white mb-4"
+          >
             Transparent, value-driven pricing.
-          </h2>
-          <p className="text-sm sm:text-base text-[#8892b0]">
+          </motion.h2>
+          <motion.p
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
+            variants={sectionParagraphVariants}
+            className="text-sm sm:text-base text-[#8892b0]"
+          >
             No ambiguous hourly billings. Fixed transparent scope, agreed milestones, and full intellectual property ownership.
-          </p>
+          </motion.p>
         </div>
 
         {/* 3 Pricing Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
-          {pricingTiers.map((tier) => {
+          {pricingTiers.map((tier, idx) => {
             const isPopular = tier.popular;
             return (
-              <div
+              <motion.div
                 key={tier.id}
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewportConfig}
+                variants={{
+                  hidden: cardRevealVariants.hidden,
+                  visible: {
+                    ...cardRevealVariants.visible,
+                    transition: {
+                      duration: 0.7,
+                      delay: idx * 0.12,
+                      ease: premiumEase,
+                    },
+                  },
+                }}
                 className={`relative rounded-3xl p-8 sm:p-10 flex flex-col justify-between transition-all duration-300 backdrop-blur-xl ${
                   isPopular
                     ? 'bg-gradient-to-b from-[#00e5ff]/10 via-white/[0.04] to-white/[0.02] border-2 border-[#00e5ff] shadow-[0_0_40px_rgba(0,229,255,0.2)] lg:-translate-y-3'
@@ -61,10 +102,16 @@ export const Pricing: React.FC<PricingProps> = ({ onSelectTier }) => {
               >
                 {/* Popular Badge */}
                 {isPopular && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-[#00e5ff] to-[#8b5cf6] text-[#050510] text-xs font-heading font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(0,229,255,0.6)] flex items-center gap-1.5">
+                  <motion.div
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    whileInView={{ scale: [0.8, 1.05, 1], opacity: 1 }}
+                    viewport={viewportConfig}
+                    transition={{ duration: 0.6, delay: 0.3, ease: premiumEase }}
+                    className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-[#00e5ff] to-[#8b5cf6] text-[#050510] text-xs font-heading font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(0,229,255,0.6)] flex items-center gap-1.5"
+                  >
                     <Sparkles className="w-3.5 h-3.5" />
                     <span>Most Popular</span>
-                  </div>
+                  </motion.div>
                 )}
 
                 <div>
@@ -121,7 +168,7 @@ export const Pricing: React.FC<PricingProps> = ({ onSelectTier }) => {
                 >
                   {tier.ctaText}
                 </Button>
-              </div>
+              </motion.div>
             );
           })}
         </div>

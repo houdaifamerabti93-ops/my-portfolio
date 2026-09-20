@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'motion/react';
 import confetti from 'canvas-confetti';
 import { 
   Send, 
@@ -14,6 +15,16 @@ import {
 } from 'lucide-react';
 import { ContactFormData } from '../../types';
 import { Button } from '../ui/Button';
+import {
+  premiumEase,
+  viewportConfig,
+  sectionLabelVariants,
+  sectionHeadingVariants,
+  sectionParagraphVariants,
+  cardRevealVariants,
+  slideInLeftVariants,
+  slideInRightVariants,
+} from '../../lib/scrollAnimations';
 
 export const Contact: React.FC = () => {
   const [formData, setFormData] = useState<ContactFormData>({
@@ -97,24 +108,48 @@ export const Contact: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 sm:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 mb-3">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
+            variants={sectionLabelVariants}
+            className="inline-flex items-center gap-2 mb-3"
+          >
             <span className="w-6 h-[1px] bg-[#00e5ff]" />
             <span className="text-xs font-mono tracking-widest text-[#00e5ff] uppercase">
               09 / Initiate Collaboration
             </span>
             <span className="w-6 h-[1px] bg-[#00e5ff]" />
-          </div>
-          <h2 className="font-heading text-3xl sm:text-5xl font-bold tracking-tight text-white mb-4">
+          </motion.div>
+          <motion.h2
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
+            variants={sectionHeadingVariants}
+            className="font-heading text-3xl sm:text-5xl font-bold tracking-tight text-white mb-4"
+          >
             Let's build something unforgettable.
-          </h2>
-          <p className="text-sm sm:text-base text-[#8892b0]">
+          </motion.h2>
+          <motion.p
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
+            variants={sectionParagraphVariants}
+            className="text-sm sm:text-base text-[#8892b0]"
+          >
             Whether you have a fully scoped design ready for development or an early-stage concept seeking 3D creative direction, my inbox is open.
-          </p>
+          </motion.p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           {/* Left Column: Direct channels, Calendly & WhatsApp */}
-          <div className="lg:col-span-5 space-y-6">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
+            variants={slideInLeftVariants}
+            className="lg:col-span-5 space-y-6"
+          >
             {/* Quick response badge */}
             <div className="p-6 rounded-3xl bg-white/[0.02] border border-white/[0.08] backdrop-blur-xl space-y-4">
               <div className="flex items-center gap-3">
@@ -153,7 +188,7 @@ export const Contact: React.FC = () => {
                   onClick={copyToClipboard}
                   data-interactive="true"
                   aria-label="Copy email address"
-                  className="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-[#00e5ff] hover:text-[#050510] text-xs font-mono text-white transition-colors flex items-center gap-1.5 shrink-0"
+                  className="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-[#00e5ff] hover:text-[#050510] text-xs font-mono text-white transition-colors flex items-center gap-1.5 shrink-0 cursor-pointer"
                 >
                   {copiedEmail ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                   <span>{copiedEmail ? 'Copied!' : 'Copy'}</span>
@@ -168,7 +203,7 @@ export const Contact: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 data-interactive="true"
-                className="p-5 rounded-2xl bg-gradient-to-br from-white/[0.04] to-white/[0.01] border border-white/[0.08] hover:border-[#8b5cf6]/50 transition-all group block"
+                className="p-5 rounded-2xl bg-gradient-to-br from-white/[0.04] to-white/[0.01] border border-white/[0.08] hover:border-[#8b5cf6]/50 transition-all group block cursor-pointer"
               >
                 <div className="w-10 h-10 rounded-xl bg-[#8b5cf6]/10 text-[#8b5cf6] flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                   <Calendar className="w-5 h-5" />
@@ -187,7 +222,7 @@ export const Contact: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 data-interactive="true"
-                className="p-5 rounded-2xl bg-gradient-to-br from-white/[0.04] to-white/[0.01] border border-white/[0.08] hover:border-emerald-500/50 transition-all group block"
+                className="p-5 rounded-2xl bg-gradient-to-br from-white/[0.04] to-white/[0.01] border border-white/[0.08] hover:border-emerald-500/50 transition-all group block cursor-pointer"
               >
                 <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                   <MessageCircle className="w-5 h-5" />
@@ -207,10 +242,16 @@ export const Contact: React.FC = () => {
               <ShieldCheck className="w-4 h-4 text-[#00e5ff] shrink-0" />
               <span>Strict NDA protection & complete code ownership upon delivery.</span>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Column: Glassmorphic Interactive Form */}
-          <div className="lg:col-span-7">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
+            variants={slideInRightVariants}
+            className="lg:col-span-7"
+          >
             <div className="p-8 sm:p-10 rounded-3xl bg-white/[0.02] border border-white/10 backdrop-blur-2xl shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
               {isSubmitted ? (
                 <div className="text-center py-12 space-y-6">
@@ -363,7 +404,7 @@ export const Contact: React.FC = () => {
                 </form>
               )}
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

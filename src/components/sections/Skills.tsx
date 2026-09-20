@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'motion/react';
 import { 
   Atom, 
   FileCode2, 
@@ -15,6 +16,14 @@ import {
   Cpu
 } from 'lucide-react';
 import { skillsData, marqueeTechLogos } from '../../lib/data/skills';
+import {
+  premiumEase,
+  viewportConfig,
+  sectionLabelVariants,
+  sectionHeadingVariants,
+  cardRevealVariants,
+  iconBounceVariants,
+} from '../../lib/scrollAnimations';
 
 export const Skills: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<string>('All');
@@ -48,20 +57,38 @@ export const Skills: React.FC = () => {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div>
-            <div className="flex items-center gap-2 mb-3">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportConfig}
+              variants={sectionLabelVariants}
+              className="flex items-center gap-2 mb-3"
+            >
               <span className="w-8 h-[1px] bg-[#00e5ff]" />
               <span className="text-xs font-mono tracking-widest text-[#00e5ff] uppercase">
                 03 / Technical Weaponry
               </span>
-            </div>
-            <h2 className="font-heading text-3xl sm:text-5xl font-bold tracking-tight text-white">
+            </motion.div>
+            <motion.h2
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportConfig}
+              variants={sectionHeadingVariants}
+              className="font-heading text-3xl sm:text-5xl font-bold tracking-tight text-white"
+            >
               Modern tech stack engineered for speed & scale.
-            </h2>
+            </motion.h2>
           </div>
 
           {/* Category Filter Pills */}
-          <div className="flex flex-wrap gap-2">
-            {categories.map((cat) => (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={viewportConfig}
+            transition={{ duration: 0.6, delay: 0.2, ease: premiumEase }}
+            className="flex flex-wrap gap-2"
+          >
+            {categories.map((cat, idx) => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
@@ -75,24 +102,41 @@ export const Skills: React.FC = () => {
                 {cat}
               </button>
             ))}
-          </div>
+          </motion.div>
         </div>
 
-        {/* Animated Grid of Skills (Lift + Glow) */}
+        {/* Animated Grid of Skills (Lift + Glow with Staggered Scroll Reveal) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mb-16">
           {filteredSkills.map((skill, index) => {
             const Icon = getIcon(skill.icon);
             return (
-              <div
+              <motion.div
                 key={skill.name}
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewportConfig}
+                variants={{
+                  hidden: cardRevealVariants.hidden,
+                  visible: {
+                    ...cardRevealVariants.visible,
+                    transition: {
+                      duration: 0.6,
+                      delay: (index % 4) * 0.08,
+                      ease: premiumEase,
+                    },
+                  },
+                }}
                 data-interactive="true"
                 className="group relative p-6 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-[#00e5ff]/50 hover:bg-white/[0.05] hover:-translate-y-1.5 transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:shadow-[0_12px_30px_rgba(0,229,255,0.15)] flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#00e5ff] group-hover:text-[#ff2d95] group-hover:scale-110 transition-all">
+                    <motion.div
+                      variants={iconBounceVariants}
+                      className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#00e5ff] group-hover:text-[#ff2d95] group-hover:scale-110 transition-all"
+                    >
                       <Icon className="w-5 h-5" />
-                    </div>
+                    </motion.div>
                     <span className="text-xs font-mono text-[#8892b0] group-hover:text-white transition-colors">
                       {skill.level}%
                     </span>
@@ -108,18 +152,27 @@ export const Skills: React.FC = () => {
 
                 {/* Progress bar */}
                 <div className="w-full bg-white/[0.06] h-1.5 rounded-full overflow-hidden">
-                  <div
-                    className="h-full bg-gradient-to-r from-[#00e5ff] to-[#8b5cf6] rounded-full transition-all duration-700 ease-out group-hover:shadow-[0_0_8px_#00e5ff]"
-                    style={{ width: `${skill.level}%` }}
+                  <motion.div
+                    initial={{ width: 0 }}
+                    whileInView={{ width: `${skill.level}%` }}
+                    viewport={viewportConfig}
+                    transition={{ duration: 0.9, delay: 0.2 + (index % 4) * 0.08, ease: premiumEase }}
+                    className="h-full bg-gradient-to-r from-[#00e5ff] to-[#8b5cf6] rounded-full group-hover:shadow-[0_0_8px_#00e5ff]"
                   />
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>
 
         {/* Marquee Ticker of Tech Badges */}
-        <div className="relative w-full overflow-hidden py-4 border-t border-b border-white/[0.06]">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.96 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={viewportConfig}
+          transition={{ duration: 0.8, ease: premiumEase }}
+          className="relative w-full overflow-hidden py-4 border-t border-b border-white/[0.06]"
+        >
           <div className="animate-marquee-right flex items-center gap-8">
             {[...marqueeTechLogos, ...marqueeTechLogos, ...marqueeTechLogos].map((tech, idx) => (
               <div
@@ -131,7 +184,7 @@ export const Skills: React.FC = () => {
               </div>
             ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

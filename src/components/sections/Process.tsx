@@ -1,5 +1,15 @@
 import React from 'react';
+import { motion } from 'motion/react';
 import { Search, Compass, Code, Rocket, CheckCircle2 } from 'lucide-react';
+import {
+  premiumEase,
+  viewportConfig,
+  sectionLabelVariants,
+  sectionHeadingVariants,
+  sectionParagraphVariants,
+  cardRevealVariants,
+  iconBounceVariants,
+} from '../../lib/scrollAnimations';
 
 export const Process: React.FC = () => {
   const steps = [
@@ -47,46 +57,93 @@ export const Process: React.FC = () => {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div>
-            <div className="flex items-center gap-2 mb-3">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportConfig}
+              variants={sectionLabelVariants}
+              className="flex items-center gap-2 mb-3"
+            >
               <span className="w-8 h-[1px] bg-[#ff2d95]" />
               <span className="text-xs font-mono tracking-widest text-[#ff2d95] uppercase">
                 05 / Method & Execution
               </span>
-            </div>
-            <h2 className="font-heading text-3xl sm:text-5xl font-bold tracking-tight text-white">
+            </motion.div>
+            <motion.h2
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportConfig}
+              variants={sectionHeadingVariants}
+              className="font-heading text-3xl sm:text-5xl font-bold tracking-tight text-white"
+            >
               The blueprint to flawless execution.
-            </h2>
+            </motion.h2>
           </div>
 
-          <p className="max-w-md text-sm sm:text-base text-[#8892b0]">
+          <motion.p
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
+            variants={sectionParagraphVariants}
+            className="max-w-md text-sm sm:text-base text-[#8892b0]"
+          >
             A transparent four-phase framework engineered to eliminate guesswork, respect hard deadlines, and guarantee Awwwards-worthy deliverables.
-          </p>
+          </motion.p>
         </div>
 
         {/* 4 Steps Horizontal Timeline */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+          {/* Subtle horizontal track across steps on desktop */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={viewportConfig}
+            transition={{ duration: 1.2, ease: premiumEase }}
+            style={{ transformOrigin: 'left' }}
+            className="hidden lg:block absolute top-[44px] left-8 right-8 h-[1px] bg-gradient-to-r from-[#00e5ff]/30 via-[#8b5cf6]/30 to-[#ff2d95]/30 z-0 pointer-events-none"
+          />
+
           {steps.map((step, idx) => {
             const Icon = step.icon;
             return (
-              <div
+              <motion.div
                 key={step.number}
-                className="group relative p-8 rounded-3xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 hover:bg-white/[0.04] transition-all duration-300 flex flex-col justify-between"
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewportConfig}
+                variants={{
+                  hidden: cardRevealVariants.hidden,
+                  visible: {
+                    ...cardRevealVariants.visible,
+                    transition: {
+                      duration: 0.7,
+                      delay: idx * 0.12,
+                      ease: premiumEase,
+                    },
+                  },
+                }}
+                className="group relative p-8 rounded-3xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 hover:bg-white/[0.04] transition-all duration-300 flex flex-col justify-between z-10"
               >
                 <div>
                   {/* Top Step Number & Icon */}
                   <div className="flex items-center justify-between mb-6">
-                    <span
+                    <motion.span
+                      initial={{ scale: 0.8, rotate: -5, opacity: 0 }}
+                      whileInView={{ scale: [0.8, 1.05, 1], rotate: 0, opacity: 1 }}
+                      viewport={viewportConfig}
+                      transition={{ duration: 0.7, delay: 0.15 + idx * 0.1, ease: premiumEase }}
                       className="font-heading text-3xl font-extrabold"
                       style={{ color: step.color }}
                     >
                       {step.number}
-                    </span>
-                    <div
+                    </motion.span>
+                    <motion.div
+                      variants={iconBounceVariants}
                       className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center transition-transform group-hover:scale-110"
                       style={{ color: step.color }}
                     >
                       <Icon className="w-5 h-5" />
-                    </div>
+                    </motion.div>
                   </div>
 
                   <span className="text-xs font-mono px-3 py-1 rounded-full bg-white/[0.04] text-[#8892b0] border border-white/[0.06] mb-3 inline-block">
@@ -111,7 +168,7 @@ export const Process: React.FC = () => {
                     </div>
                   ))}
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>

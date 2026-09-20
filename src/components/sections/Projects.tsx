@@ -13,6 +13,14 @@ import {
 import { projectsData } from '../../lib/data/projects';
 import { Project } from '../../types';
 import { Button } from '../ui/Button';
+import {
+  premiumEase,
+  viewportConfig,
+  sectionLabelVariants,
+  sectionHeadingVariants,
+  sectionParagraphVariants,
+  cardRevealVariants,
+} from '../../lib/scrollAnimations';
 
 interface ProjectsProps {
   onSelectProject: (project: Project) => void;
@@ -32,7 +40,8 @@ interface ProjectsProps {
 const ProjectCard: React.FC<{
   project: Project;
   onSelect: () => void;
-}> = ({ project, onSelect }) => {
+  index: number;
+}> = ({ project, onSelect, index }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const [transformStyle, setTransformStyle] = useState('');
 
@@ -60,19 +69,36 @@ const ProjectCard: React.FC<{
   };
 
   return (
-    <div
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      onClick={onSelect}
-      style={{
-        transform: transformStyle,
-        transformStyle: 'preserve-3d',
-        transition: 'transform 0.15s cubic-bezier(0.2, 0, 0.2, 1)',
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={viewportConfig}
+      variants={{
+        hidden: cardRevealVariants.hidden,
+        visible: {
+          ...cardRevealVariants.visible,
+          transition: {
+            duration: 0.7,
+            delay: (index % 2) * 0.12,
+            ease: premiumEase,
+          },
+        },
       }}
-      data-interactive="true"
-      className="project-grid-card relative p-[1.5px] rounded-3xl bg-white/[0.07] hover:bg-gradient-to-br hover:from-[#00e5ff] hover:via-[#8b5cf6] hover:to-[#ff2d95] transition-all duration-500 shadow-[0_15px_35px_rgba(0,0,0,0.5)] hover:shadow-[0_25px_60px_rgba(0,229,255,0.22)] cursor-pointer group flex flex-col"
+      className="h-full flex flex-col"
     >
+      <div
+        ref={cardRef}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        onClick={onSelect}
+        style={{
+          transform: transformStyle,
+          transformStyle: 'preserve-3d',
+          transition: 'transform 0.15s cubic-bezier(0.2, 0, 0.2, 1)',
+        }}
+        data-interactive="true"
+        className="project-grid-card relative p-[1.5px] rounded-3xl bg-white/[0.07] hover:bg-gradient-to-br hover:from-[#00e5ff] hover:via-[#8b5cf6] hover:to-[#ff2d95] transition-all duration-500 shadow-[0_15px_35px_rgba(0,0,0,0.5)] hover:shadow-[0_25px_60px_rgba(0,229,255,0.22)] cursor-pointer group flex flex-col h-full"
+      >
       {/* Card Inner Canvas */}
       <div className="relative rounded-[22px] bg-[#070716]/95 backdrop-blur-xl h-full flex flex-col justify-between overflow-hidden">
         
@@ -177,6 +203,7 @@ const ProjectCard: React.FC<{
         </div>
       </div>
     </div>
+    </motion.div>
   );
 };
 
@@ -222,31 +249,51 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
     <section id="projects" className="py-24 md:py-32 relative">
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
         
-        {/* SECTION HEADER:
-            - Label: "04 / SELECTED WORKS"
-            - Title: "Featured projects & case studies."
-            - Subtitle on the right: "A selection of recent work — from landing pages to full-stack apps."
-        */}
+        {/* SECTION HEADER with Scroll Reveal */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-14 gap-6">
           <div>
-            <div className="flex items-center gap-2 mb-3">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportConfig}
+              variants={sectionLabelVariants}
+              className="flex items-center gap-2 mb-3"
+            >
               <span className="w-8 h-[1px] bg-[#00e5ff]" />
               <span className="text-xs font-mono tracking-widest text-[#00e5ff] uppercase">
                 04 / SELECTED WORKS
               </span>
-            </div>
-            <h2 className="font-heading text-3xl sm:text-5xl font-bold tracking-tight text-white">
+            </motion.div>
+            <motion.h2
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportConfig}
+              variants={sectionHeadingVariants}
+              className="font-heading text-3xl sm:text-5xl font-bold tracking-tight text-white"
+            >
               Featured projects & case studies.
-            </h2>
+            </motion.h2>
           </div>
 
-          <p className="text-sm sm:text-base text-[#8892b0] max-w-md leading-relaxed md:text-right font-sans">
+          <motion.p
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
+            variants={sectionParagraphVariants}
+            className="text-sm sm:text-base text-[#8892b0] max-w-md leading-relaxed md:text-right font-sans"
+          >
             A selection of recent work — from landing pages to full-stack apps.
-          </p>
+          </motion.p>
         </div>
 
         {/* Filter Tabs with animated active state (cyan pill background) */}
-        <div className="flex items-center justify-start sm:justify-end mb-10">
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={viewportConfig}
+          transition={{ duration: 0.6, delay: 0.15, ease: premiumEase }}
+          className="flex items-center justify-start sm:justify-end mb-10"
+        >
           <div className="flex flex-wrap gap-1.5 p-1.5 rounded-full bg-white/[0.03] border border-white/[0.08] backdrop-blur-md">
             {tabs.map((tab) => {
               const isActive = activeTab === tab;
@@ -272,7 +319,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
               );
             })}
           </div>
-        </div>
+        </motion.div>
 
         {/* 
           LAYOUT:
@@ -284,10 +331,11 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
           ref={gridRef}
           className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 items-stretch"
         >
-          {filteredProjects.map((project) => (
+          {filteredProjects.map((project, idx) => (
             <ProjectCard
               key={project.id}
               project={project}
+              index={idx}
               onSelect={() => onSelectProject(project)}
             />
           ))}
@@ -297,7 +345,13 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
             - Last card = "View all projects →" linking to /projects
             - Different style (dashed border, no image)
           */}
-          <div className="project-grid-card h-full min-h-[380px]">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
+            variants={cardRevealVariants}
+            className="project-grid-card h-full min-h-[380px]"
+          >
             <a
               href="/projects"
               onClick={(e) => {
@@ -329,7 +383,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
                 <ArrowRight className="w-3.5 h-3.5" />
               </span>
             </a>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

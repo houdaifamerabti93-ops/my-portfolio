@@ -1,6 +1,8 @@
 import React from 'react';
+import { motion } from 'motion/react';
 import { Github, Twitter, Linkedin, Dribbble, ArrowUp, Mail, MapPin, Sparkles } from 'lucide-react';
 import { Button } from '../ui/Button';
+import { premiumEase, viewportConfig } from '../../lib/scrollAnimations';
 
 export const Footer: React.FC = () => {
   const scrollToTop = () => {
@@ -8,7 +10,13 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="relative bg-[#050510] border-t border-white/[0.08] pt-20 pb-12 overflow-hidden">
+    <motion.footer
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.1 }}
+      transition={{ duration: 0.8, ease: premiumEase }}
+      className="relative bg-[#050510] border-t border-white/[0.08] pt-20 pb-12 overflow-hidden"
+    >
       {/* Background ambient lighting */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-24 bg-[#00e5ff]/5 blur-3xl pointer-events-none" />
 
@@ -102,7 +110,7 @@ export const Footer: React.FC = () => {
                     rel="noopener noreferrer"
                     aria-label={social.label}
                     data-interactive="true"
-                    className="p-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white/70 hover:text-[#00e5ff] hover:border-[#00e5ff]/40 hover:shadow-[0_0_15px_rgba(0,229,255,0.3)] transition-all"
+                    className="p-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white/70 hover:text-[#00e5ff] hover:border-[#00e5ff]/40 hover:shadow-[0_0_15px_rgba(0,229,255,0.3)] transition-all cursor-pointer"
                   >
                     <Icon className="w-4 h-4" />
                   </a>
@@ -132,6 +140,6 @@ export const Footer: React.FC = () => {
           </Button>
         </div>
       </div>
-    </footer>
+    </motion.footer>
   );
 };
