@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00e5ff" />
+      <stop offset="100%" stop-color="#00a8cc" />
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="#050510" stroke="#00e5ff" stroke-width="2.5" />
+  <circle cx="32" cy="32" r="26" fill="url(#cyanGrad)" />
+  <!-- Stylized crisp white "H" -->
+  <path d="M22 19 H27 V29 H37 V19 H42 V45 H37 V34 H27 V45 H22 Z" fill="#ffffff" />
+</svg>
