@@ -117,7 +117,7 @@ SELECTED RECENT HIGHLIGHTS
 
 CONTACT & INQUIRIES
 -------------------
-Direct Email: abdrhmanemerabti512@gmail.com
+Direct Email: houdaifamerabti93@gmail.com
 Calendly: 15-minute introductory technical discovery call available
 =====================================================`;
 

@@ -41,7 +41,7 @@ export const Contact: React.FC = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [copiedEmail, setCopiedEmail] = useState(false);
 
-  const directEmail = 'abdrhmanemerabti512@gmail.com';
+  const directEmail = 'houdaifamerabti93@gmail.com';
 
   const validateForm = (): boolean => {
     const newErrors: Partial<Record<keyof ContactFormData, string>> = {};
@@ -183,12 +183,16 @@ export const Contact: React.FC = () => {
                 Direct Email Inquiries
               </div>
               <div className="flex items-center justify-between gap-3 p-3 rounded-2xl bg-white/[0.03] border border-white/[0.06]">
-                <div className="flex items-center gap-2 overflow-hidden">
-                  <Mail className="w-4 h-4 text-[#00e5ff] shrink-0" />
-                  <span className="text-sm font-mono text-white truncate">
+                <a
+                  href={`mailto:${directEmail}`}
+                  className="flex items-center gap-2 overflow-hidden group/mail cursor-pointer"
+                  title="Send email to Houdaifa"
+                >
+                  <Mail className="w-4 h-4 text-[#00e5ff] shrink-0 group-hover/mail:scale-110 transition-transform" />
+                  <span className="text-sm font-mono text-white group-hover/mail:text-[#00e5ff] truncate transition-colors">
                     {directEmail}
                   </span>
-                </div>
+                </a>
                 <motion.button
                   onClick={copyToClipboard}
                   whileTap={{ scale: 0.92 }}

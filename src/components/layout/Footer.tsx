@@ -89,8 +89,8 @@ export const Footer: React.FC = () => {
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-[#8b5cf6]" />
-                <a href="mailto:abdrhmanemerabti512@gmail.com" className="hover:text-white transition-colors">
-                  abdrhmanemerabti512@gmail.com
+                <a href="mailto:houdaifamerabti93@gmail.com" className="hover:text-white transition-colors">
+                  houdaifamerabti93@gmail.com
                 </a>
               </div>
             </div>
