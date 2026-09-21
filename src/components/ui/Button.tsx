@@ -13,6 +13,7 @@ export interface ButtonProps extends Omit<HTMLMotionProps<'button'>, 'children' 
   size?: ButtonSize;
   magnetic?: boolean;
   loading?: boolean;
+  loadingText?: string;
   icon?: React.ReactNode;
   iconPosition?: 'left' | 'right';
   iconAnimation?: ButtonIconAnimation;
@@ -52,6 +53,7 @@ export const Button: React.FC<ButtonProps> = ({
   size = 'md',
   magnetic = true,
   loading = false,
+  loadingText,
   icon,
   iconPosition = 'right',
   iconAnimation = 'auto',
@@ -322,7 +324,7 @@ export const Button: React.FC<ButtonProps> = ({
       {loading ? (
         <span className="relative z-10 inline-flex items-center gap-2.5">
           <span className="w-4 h-4 rounded-full border-2 border-current border-t-transparent animate-spin shrink-0" />
-          <span>Processing...</span>
+          <span>{loadingText || 'Processing...'}</span>
         </span>
       ) : (
         <span className="relative z-10 inline-flex items-center justify-center gap-2.5 leading-none">

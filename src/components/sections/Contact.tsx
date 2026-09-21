@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import confetti from 'canvas-confetti';
 import { 
   Send, 
@@ -8,99 +8,165 @@ import {
   Calendar, 
   MessageCircle, 
   Mail, 
-  Sparkles, 
   Clock, 
   ShieldCheck, 
-  ExternalLink 
+  ExternalLink,
+  AlertCircle
 } from 'lucide-react';
 import { ContactFormData } from '../../types';
 import { Button } from '../ui/Button';
 import { triggerHaptic } from '../../lib/haptics';
 import {
-  premiumEase,
   viewportConfig,
   sectionLabelVariants,
   sectionHeadingVariants,
   sectionParagraphVariants,
-  cardRevealVariants,
   slideInLeftVariants,
   slideInRightVariants,
 } from '../../lib/scrollAnimations';
+
+/**
+ * Web3Forms Public Access Key
+ * Safe for client-side usage; routes submissions to houdaifamerabti93@gmail.com
+ */
+const WEB3FORMS_ACCESS_KEY = '0ea939be-62ac-417e-a2d4-baaf2eea3569';
+const WHATSAPP_URL = 'https://wa.me/213773018738?text=Hi%20Houdaifa%2C%20I%27d%20like%20to%20discuss%20a%20project';
+const DIRECT_EMAIL = 'houdaifamerabti93@gmail.com';
+
+type FormStatus = 'idle' | 'loading' | 'success' | 'error';
 
 export const Contact: React.FC = () => {
   const [formData, setFormData] = useState<ContactFormData>({
     name: '',
     email: '',
+    subject: '',
     projectType: 'Web Development (React / Next.js)',
     budget: '$5k–$10k',
     message: '',
   });
 
   const [errors, setErrors] = useState<Partial<Record<keyof ContactFormData, string>>>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [status, setStatus] = useState<FormStatus>('idle');
+  const [errorMessage, setErrorMessage] = useState<string>('');
   const [copiedEmail, setCopiedEmail] = useState(false);
 
-  const directEmail = 'houdaifamerabti93@gmail.com';
-
+  // Field validation
   const validateForm = (): boolean => {
     const newErrors: Partial<Record<keyof ContactFormData, string>> = {};
 
+    // Name: required, min 2 characters
     if (!formData.name.trim()) {
-      newErrors.name = 'Please enter your name or company';
+      newErrors.name = 'Please enter your name';
     } else if (formData.name.trim().length < 2) {
       newErrors.name = 'Name must be at least 2 characters';
     }
 
+    // Email: required, valid format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!formData.email.trim()) {
-      newErrors.email = 'Please provide a valid work email';
-    } else if (!emailRegex.test(formData.email)) {
-      newErrors.email = 'Invalid email address format';
+      newErrors.email = 'Please provide your email address';
+    } else if (!emailRegex.test(formData.email.trim())) {
+      newErrors.email = 'Please enter a valid email format';
     }
 
+    // Message: required, min 10 characters
     if (!formData.message.trim()) {
-      newErrors.message = 'Please share a few details about your project';
-    } else if (formData.message.trim().length < 15) {
-      newErrors.message = 'Message must be at least 15 characters';
+      newErrors.message = 'Please provide details about your project';
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = 'Message must be at least 10 characters';
     }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Form submission via Web3Forms API
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!validateForm()) return;
+    if (!validateForm()) {
+      triggerHaptic(20);
+      return;
+    }
 
-    setIsSubmitting(true);
+    setStatus('loading');
+    setErrorMessage('');
 
-    // Simulate reliable dispatch
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSubmitted(true);
+    const formattedSubject = formData.subject?.trim()
+      ? formData.subject.trim()
+      : `New project inquiry from ${formData.name.trim()}`;
 
-      // Trigger success pattern [10, 30, 10]
-      triggerHaptic([10, 30, 10]);
+    const formattedMessage = [
+      `Sender Name: ${formData.name.trim()}`,
+      `Sender Email: ${formData.email.trim()}`,
+      `Project Nature: ${formData.projectType}`,
+      `Anticipated Budget: ${formData.budget}`,
+      formData.subject?.trim() ? `Subject: ${formData.subject.trim()}` : null,
+      '',
+      '--- Message Content ---',
+      formData.message.trim(),
+    ]
+      .filter((line) => line !== null)
+      .join('\n');
 
-      // Confetti burst
-      try {
-        confetti({
-          particleCount: 120,
-          spread: 70,
-          origin: { y: 0.6 },
-          colors: ['#00e5ff', '#8b5cf6', '#ff2d95', '#ffffff'],
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          subject: formattedSubject,
+          message: formattedMessage,
+          from_name: 'Portfolio Contact Form',
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setStatus('success');
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
+          projectType: 'Web Development (React / Next.js)',
+          budget: '$5k–$10k',
+          message: '',
         });
-      } catch {
-        // graceful fallback if canvas blocked
+        setErrors({});
+
+        // Tactile and visual confirmation
+        triggerHaptic([10, 30, 10]);
+        try {
+          confetti({
+            particleCount: 120,
+            spread: 70,
+            origin: { y: 0.6 },
+            colors: ['#00e5ff', '#8b5cf6', '#25D366', '#ffffff'],
+          });
+        } catch {
+          // Graceful fallback if canvas blocked
+        }
+      } else {
+        setStatus('error');
+        setErrorMessage(data.message || 'Something went wrong. Please try WhatsApp instead.');
+        triggerHaptic([30, 50, 30]);
       }
-    }, 1000);
+    } catch {
+      setStatus('error');
+      setErrorMessage('Something went wrong. Please try WhatsApp instead.');
+      triggerHaptic([30, 50, 30]);
+    }
   };
 
   const copyToClipboard = () => {
     triggerHaptic(10);
-    navigator.clipboard.writeText(directEmail);
+    navigator.clipboard.writeText(DIRECT_EMAIL);
     setCopiedEmail(true);
     setTimeout(() => setCopiedEmail(false), 2500);
   };
@@ -184,13 +250,13 @@ export const Contact: React.FC = () => {
               </div>
               <div className="flex items-center justify-between gap-3 p-3 rounded-2xl bg-white/[0.03] border border-white/[0.06]">
                 <a
-                  href={`mailto:${directEmail}`}
+                  href={`mailto:${DIRECT_EMAIL}`}
                   className="flex items-center gap-2 overflow-hidden group/mail cursor-pointer"
                   title="Send email to Houdaifa"
                 >
                   <Mail className="w-4 h-4 text-[#00e5ff] shrink-0 group-hover/mail:scale-110 transition-transform" />
                   <span className="text-sm font-mono text-white group-hover/mail:text-[#00e5ff] truncate transition-colors">
-                    {directEmail}
+                    {DIRECT_EMAIL}
                   </span>
                 </a>
                 <motion.button
@@ -233,16 +299,16 @@ export const Contact: React.FC = () => {
               </motion.a>
 
               <motion.a
-                href="https://wa.me/"
+                href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 whileTap={{ scale: 0.97 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 20 }}
                 style={{ touchAction: 'manipulation' }}
                 data-interactive="true"
-                className="p-5 rounded-2xl bg-gradient-to-br from-white/[0.04] to-white/[0.01] border border-white/[0.08] hover:border-emerald-500/50 transition-all group block cursor-pointer"
+                className="p-5 rounded-2xl bg-gradient-to-br from-white/[0.04] to-white/[0.01] border border-white/[0.08] hover:border-[#25D366]/50 transition-all group block cursor-pointer"
               >
-                <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <div className="w-10 h-10 rounded-xl bg-[#25D366]/10 text-[#25D366] flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                   <MessageCircle className="w-5 h-5" />
                 </div>
                 <div className="font-heading font-semibold text-white text-sm flex items-center justify-between">
@@ -271,79 +337,147 @@ export const Contact: React.FC = () => {
             className="lg:col-span-7"
           >
             <div className="p-8 sm:p-10 rounded-3xl bg-white/[0.02] border border-white/10 backdrop-blur-2xl shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
-              {isSubmitted ? (
-                <div className="text-center py-12 space-y-6">
-                  <div className="w-16 h-16 rounded-full bg-emerald-500/10 border-2 border-emerald-500/30 text-emerald-400 flex items-center justify-center mx-auto shadow-[0_0_30px_rgba(16,185,129,0.3)]">
-                    <Check className="w-8 h-8" />
-                  </div>
+              {status === 'success' ? (
+                /* SUCCESS STATE */
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.92 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                  className="text-center py-12 space-y-6"
+                >
+                  <motion.div
+                    initial={{ scale: 0, rotate: -45 }}
+                    animate={{ scale: 1, rotate: 0 }}
+                    transition={{ type: 'spring', stiffness: 350, damping: 18 }}
+                    className="w-16 h-16 rounded-full bg-emerald-500/15 border-2 border-emerald-500/40 text-emerald-400 flex items-center justify-center mx-auto shadow-[0_0_35px_rgba(16,185,129,0.35)]"
+                  >
+                    <Check className="w-8 h-8 stroke-[2.5]" />
+                  </motion.div>
                   <div>
                     <h3 className="font-heading text-2xl sm:text-3xl font-bold text-white mb-2">
-                      Transmission Received!
+                      Message sent! I'll get back to you soon.
                     </h3>
-                    <p className="text-sm sm:text-base text-[#8892b0] max-w-md mx-auto">
-                      Thank you, <span className="text-white font-semibold">{formData.name}</span>. I have received your message regarding {formData.projectType} and will be in touch shortly.
+                    <p className="text-sm sm:text-base text-[#8892b0] max-w-md mx-auto leading-relaxed">
+                      Thank you for reaching out. Your proposal has been dispatched directly to my inbox. Expect a response within 12–24 business hours.
                     </p>
                   </div>
-                  <Button
-                    variant="secondary"
-                    size="md"
-                    onClick={() => {
-                      setIsSubmitted(false);
-                      setFormData({
-                        name: '',
-                        email: '',
-                        projectType: 'Web Development (React/Next.js)',
-                        budget: '$5k–$10k',
-                        message: '',
-                      });
-                    }}
-                  >
-                    Send Another Message
-                  </Button>
-                </div>
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+                    <Button
+                      variant="secondary"
+                      size="md"
+                      onClick={() => setStatus('idle')}
+                    >
+                      Send Another Message
+                    </Button>
+                    <motion.a
+                      href={WHATSAPP_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="px-5 py-2.5 rounded-full text-xs font-mono font-semibold text-white bg-[#25D366]/20 border border-[#25D366]/40 hover:bg-[#25D366] hover:text-[#050510] transition-all flex items-center gap-2"
+                    >
+                      <MessageCircle className="w-3.5 h-3.5" />
+                      <span>Chat on WhatsApp</span>
+                    </motion.a>
+                  </div>
+                </motion.div>
               ) : (
+                /* FORM (idle, loading, error states) */
                 <form onSubmit={handleSubmit} className="space-y-6">
                   {/* Name & Email */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-xs font-mono uppercase tracking-wider text-[#8892b0] mb-2">
-                        Your Name / Organization <span className="text-[#00e5ff]">*</span>
+                        Your Name <span className="text-[#00e5ff]">*</span>
                       </label>
-                      <input
+                      <motion.input
                         type="text"
-                        placeholder="e.g. Satoshi Nakamoto"
+                        placeholder="e.g. Alex Morgan"
                         value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        whileFocus={{ scale: 1.01 }}
+                        transition={{ duration: 0.2 }}
+                        onChange={(e) => {
+                          setFormData({ ...formData, name: e.target.value });
+                          if (errors.name) {
+                            setErrors({ ...errors, name: undefined });
+                          }
+                        }}
                         className={`w-full px-4 py-3.5 rounded-xl bg-white/[0.04] border text-white placeholder-white/20 text-sm focus:outline-none transition-all ${
                           errors.name
                             ? 'border-rose-500/80 focus:ring-1 focus:ring-rose-500'
                             : 'border-white/10 focus:border-[#00e5ff] focus:ring-1 focus:ring-[#00e5ff]'
                         }`}
                       />
-                      {errors.name && (
-                        <p className="text-xs text-rose-400 mt-1 font-mono">{errors.name}</p>
-                      )}
+                      <AnimatePresence>
+                        {errors.name && (
+                          <motion.p
+                            initial={{ opacity: 0, y: -4, height: 0 }}
+                            animate={{ opacity: 1, y: 0, height: 'auto' }}
+                            exit={{ opacity: 0, y: -4, height: 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="text-xs text-rose-400 mt-1.5 font-mono flex items-center gap-1.5"
+                          >
+                            <AlertCircle className="w-3 h-3 shrink-0" />
+                            <span>{errors.name}</span>
+                          </motion.p>
+                        )}
+                      </AnimatePresence>
                     </div>
 
                     <div>
                       <label className="block text-xs font-mono uppercase tracking-wider text-[#8892b0] mb-2">
-                        Work Email Address <span className="text-[#00e5ff]">*</span>
+                        Email Address <span className="text-[#00e5ff]">*</span>
                       </label>
-                      <input
+                      <motion.input
                         type="email"
                         placeholder="name@company.com"
                         value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        whileFocus={{ scale: 1.01 }}
+                        transition={{ duration: 0.2 }}
+                        onChange={(e) => {
+                          setFormData({ ...formData, email: e.target.value });
+                          if (errors.email) {
+                            setErrors({ ...errors, email: undefined });
+                          }
+                        }}
                         className={`w-full px-4 py-3.5 rounded-xl bg-white/[0.04] border text-white placeholder-white/20 text-sm focus:outline-none transition-all ${
                           errors.email
                             ? 'border-rose-500/80 focus:ring-1 focus:ring-rose-500'
                             : 'border-white/10 focus:border-[#00e5ff] focus:ring-1 focus:ring-[#00e5ff]'
                         }`}
                       />
-                      {errors.email && (
-                        <p className="text-xs text-rose-400 mt-1 font-mono">{errors.email}</p>
-                      )}
+                      <AnimatePresence>
+                        {errors.email && (
+                          <motion.p
+                            initial={{ opacity: 0, y: -4, height: 0 }}
+                            animate={{ opacity: 1, y: 0, height: 'auto' }}
+                            exit={{ opacity: 0, y: -4, height: 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="text-xs text-rose-400 mt-1.5 font-mono flex items-center gap-1.5"
+                          >
+                            <AlertCircle className="w-3 h-3 shrink-0" />
+                            <span>{errors.email}</span>
+                          </motion.p>
+                        )}
+                      </AnimatePresence>
                     </div>
+                  </div>
+
+                  {/* Subject (Optional) */}
+                  <div>
+                    <label className="block text-xs font-mono uppercase tracking-wider text-[#8892b0] mb-2 flex items-center justify-between">
+                      <span>Subject <span className="text-white/40 lowercase text-[10px]">(optional)</span></span>
+                    </label>
+                    <motion.input
+                      type="text"
+                      placeholder="e.g. Next.js Web App Redesign"
+                      value={formData.subject || ''}
+                      whileFocus={{ scale: 1.01 }}
+                      transition={{ duration: 0.2 }}
+                      onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                      className="w-full px-4 py-3.5 rounded-xl bg-white/[0.04] border border-white/10 text-white placeholder-white/20 text-sm focus:outline-none focus:border-[#00e5ff] focus:ring-1 focus:ring-[#00e5ff] transition-all"
+                    />
                   </div>
 
                   {/* Project Type & Budget */}
@@ -388,21 +522,74 @@ export const Contact: React.FC = () => {
                     <label className="block text-xs font-mono uppercase tracking-wider text-[#8892b0] mb-2">
                       Project Goals & Scope <span className="text-[#00e5ff]">*</span>
                     </label>
-                    <textarea
+                    <motion.textarea
                       rows={4}
-                      placeholder="Tell me about your product, desired launch date, target audience, and any existing design or technical specifications..."
+                      placeholder="Tell me about your product, desired launch timeline, and key requirements..."
                       value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      whileFocus={{ scale: 1.005 }}
+                      transition={{ duration: 0.2 }}
+                      onChange={(e) => {
+                        setFormData({ ...formData, message: e.target.value });
+                        if (errors.message) {
+                          setErrors({ ...errors, message: undefined });
+                        }
+                      }}
                       className={`w-full px-4 py-3.5 rounded-xl bg-white/[0.04] border text-white placeholder-white/20 text-sm focus:outline-none transition-all resize-none ${
                         errors.message
                           ? 'border-rose-500/80 focus:ring-1 focus:ring-rose-500'
                           : 'border-white/10 focus:border-[#00e5ff] focus:ring-1 focus:ring-[#00e5ff]'
                       }`}
                     />
-                    {errors.message && (
-                      <p className="text-xs text-rose-400 mt-1 font-mono">{errors.message}</p>
-                    )}
+                    <AnimatePresence>
+                      {errors.message && (
+                        <motion.p
+                          initial={{ opacity: 0, y: -4, height: 0 }}
+                          animate={{ opacity: 1, y: 0, height: 'auto' }}
+                          exit={{ opacity: 0, y: -4, height: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="text-xs text-rose-400 mt-1.5 font-mono flex items-center gap-1.5"
+                        >
+                          <AlertCircle className="w-3 h-3 shrink-0" />
+                          <span>{errors.message}</span>
+                        </motion.p>
+                      )}
+                    </AnimatePresence>
                   </div>
+
+                  {/* ERROR STATE: Red message with shake animation + WhatsApp fallback */}
+                  <AnimatePresence>
+                    {status === 'error' && (
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.96 }}
+                        animate={{
+                          opacity: 1,
+                          scale: 1,
+                          x: [-8, 8, -6, 6, -3, 3, 0],
+                        }}
+                        exit={{ opacity: 0, scale: 0.96 }}
+                        transition={{ duration: 0.45 }}
+                        className="p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-lg"
+                      >
+                        <div className="flex items-center gap-2.5">
+                          <AlertCircle className="w-5 h-5 text-rose-400 shrink-0" />
+                          <span className="font-medium text-xs sm:text-sm">
+                            {errorMessage || 'Something went wrong. Please try WhatsApp instead.'}
+                          </span>
+                        </div>
+                        <motion.a
+                          href={WHATSAPP_URL}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          whileHover={{ scale: 1.03 }}
+                          whileTap={{ scale: 0.97 }}
+                          className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-[#25D366] hover:bg-[#20ba59] text-[#050510] text-xs font-bold font-mono transition-colors shadow-md shrink-0 cursor-pointer"
+                        >
+                          <MessageCircle className="w-4 h-4 fill-current" />
+                          <span>Chat on WhatsApp</span>
+                        </motion.a>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
 
                   {/* Submit Button */}
                   <Button
@@ -410,12 +597,41 @@ export const Contact: React.FC = () => {
                     variant="primary"
                     size="lg"
                     fullWidth
-                    loading={isSubmitting}
+                    loading={status === 'loading'}
+                    loadingText="Sending..."
+                    disabled={status === 'loading'}
                     icon={<Send className="w-4 h-4" />}
                     iconPosition="right"
                   >
                     Submit Project Proposal
                   </Button>
+
+                  {/* WhatsApp Secondary Direct Option */}
+                  <div className="pt-2">
+                    <div className="relative flex items-center justify-center mb-4">
+                      <div className="absolute inset-0 flex items-center">
+                        <div className="w-full border-t border-white/[0.08]" />
+                      </div>
+                      <div className="relative px-3 bg-[#070716] text-[11px] font-mono uppercase tracking-wider text-[#8892b0]">
+                        Or direct chat
+                      </div>
+                    </div>
+
+                    <motion.a
+                      href={WHATSAPP_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.01, backgroundColor: 'rgba(37, 211, 102, 0.22)' }}
+                      whileTap={{ scale: 0.98 }}
+                      transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                      style={{ touchAction: 'manipulation' }}
+                      data-interactive="true"
+                      className="w-full min-h-[48px] px-6 py-3.5 rounded-xl bg-[#25D366]/12 border border-[#25D366]/35 text-[#25D366] hover:text-white hover:border-[#25D366] text-sm font-semibold flex items-center justify-center gap-2.5 transition-all duration-300 shadow-[0_0_20px_rgba(37,211,102,0.1)] hover:shadow-[0_0_30px_rgba(37,211,102,0.25)] cursor-pointer group"
+                    >
+                      <MessageCircle className="w-4 h-4 text-[#25D366] group-hover:scale-110 transition-transform" />
+                      <span>Chat on WhatsApp</span>
+                    </motion.a>
+                  </div>
                 </form>
               )}
             </div>
