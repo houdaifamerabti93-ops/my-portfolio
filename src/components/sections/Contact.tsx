@@ -31,7 +31,7 @@ export const Contact: React.FC = () => {
   const [formData, setFormData] = useState<ContactFormData>({
     name: '',
     email: '',
-    projectType: 'Web Development (React/Next.js)',
+    projectType: 'Web Development (React / Next.js)',
     budget: '$5k–$10k',
     message: '',
   });
@@ -358,13 +358,10 @@ export const Contact: React.FC = () => {
                         onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
                         className="w-full px-4 py-3.5 rounded-xl bg-[#0a0a1a] border border-white/10 text-white text-sm focus:outline-none focus:border-[#00e5ff] transition-all"
                       >
-                        <option value="Web Development (React/Next.js)">Web App (React/Next.js)</option>
-                        <option value="E-commerce & Storefronts">Headless E-commerce</option>
-                        <option value="High-Impact Landing Pages">3D / WebGL Landing Page</option>
-                        <option value="API & Backend Architecture">API / Backend System</option>
-                        <option value="Creative UI Implementation">Figma to Code / UI</option>
-                        <option value="Performance Optimization">Performance Audit</option>
-                        <option value="Custom Bespoke Retainer">Custom Engineering</option>
+                        <option value="Web Development (React / Next.js)">Web Development (React / Next.js)</option>
+                        <option value="E-commerce & Storefronts">E-commerce & Storefronts</option>
+                        <option value="Landing Pages & Creative UI">Landing Pages & Creative UI</option>
+                        <option value="Custom Bespoke Engineering">Custom Bespoke Engineering</option>
                       </select>
                     </div>
 
