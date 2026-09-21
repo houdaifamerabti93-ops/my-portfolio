@@ -2,6 +2,7 @@ export interface Project {
   id: string;
   title: string;
   category: 'Web' | 'App' | 'E-commerce' | '3D';
+  status?: 'Concept' | 'In Development';
   year: string;
   tagline: string;
   description: string;

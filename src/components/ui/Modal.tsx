@@ -77,17 +77,20 @@ export const Modal: React.FC<ModalProps> = ({ project, onClose }) => {
             
             <div className="absolute bottom-6 left-6 right-6 flex flex-wrap items-end justify-between gap-4">
               <div>
-                {/* Type + Year Badges */}
+                {/* Type + Status + Year Badges */}
                 <div className="flex items-center gap-2 mb-2.5 flex-wrap">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-semibold bg-[#00e5ff]/20 text-[#00e5ff] border border-[#00e5ff]/40 shadow-sm">
                     <Tag className="w-3 h-3" />
                     {project.category}
                   </span>
+                  <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-mono font-medium bg-white/10 backdrop-blur-md text-[#8892b0] border border-white/15">
+                    {project.status || 'Concept'}
+                  </span>
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-medium bg-white/10 text-white border border-white/15">
                     <Calendar className="w-3 h-3 text-[#00e5ff]" />
                     {project.year}
                   </span>
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold bg-[#00e5ff]/10 text-[#00e5ff] border border-[#00e5ff]/30">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-medium bg-[#00e5ff]/10 text-[#00e5ff] border border-[#00e5ff]/30">
                     {project.metric}
                   </span>
                 </div>

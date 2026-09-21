@@ -2,153 +2,159 @@ import { Project } from '../../types';
 
 /**
  * Featured portfolio projects data
- * Replace any placeholder title, description, metrics, links, or images with your custom client work.
+ * Honest, realistic demo and concept projects showcasing web technologies.
  */
 export const projectsData: Project[] = [
   {
     id: 'project-1',
-    title: 'Nexus Spatial WebOS',
+    title: '3D Web Experience',
     category: '3D',
+    status: 'Concept',
     year: '2025',
-    tagline: 'Interactive 3D Spatial Computing Environment & WebOS',
-    description: 'Real-time spatial desktop operating system featuring interactive 3D physics, custom GLSL shader pipelines, and audio-reactive telemetry.',
-    metric: '+60 FPS locked',
+    tagline: 'Interactive 3D spatial computing environment & WebGL showcase',
+    description: 'An interactive 3D web experiment featuring particle physics, custom GLSL shaders, and audio-reactive elements built with Three.js and React.',
+    metric: 'WebGL & Shaders',
     image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200&auto=format&fit=crop',
-    tags: ['Three.js', 'Next.js', 'TypeScript', 'GLSL', 'WebAudio'],
-    liveUrl: 'https://nexus-webos.demo',
-    githubUrl: 'https://github.com/houdaifa/nexus-spatial-webos',
+    tags: ['Three.js', 'React', 'TypeScript', 'GLSL', 'WebAudio'],
+    liveUrl: 'https://github.com/houdaifa',
+    githubUrl: 'https://github.com/houdaifa',
     featured: true,
     caseStudy: {
-      challenge: 'Rendering over 40,000 instanced particles, complex geometric lighting, and spatial audio with 60+ FPS performance across both mobile and desktop browsers without thermal throttling.',
-      solution: 'Engineered custom WebGL vertex and fragment shaders using off-screen render targets, instanced buffer geometries, and compute-light Level of Detail (LOD) fallbacks.',
-      result: 'Maintained locked 60 FPS across 98% of tested devices with zero dropped frames during multi-window spatial zoom transitions.',
+      challenge: 'Rendering instanced particles and spatial audio in the browser while maintaining a consistent 60 FPS across both desktop and mobile viewports.',
+      solution: 'Constructed custom WebGL vertex and fragment shaders using off-screen render targets and instanced buffer geometries with LOD fallbacks.',
+      result: 'Achieved smooth, fluid animations and responsive touch interactions without overheating or memory degradation.',
       metrics: [
-        { label: 'Frame Rate', value: '60 FPS stable' },
-        { label: 'Bundle Size', value: '185 KB gzipped' },
-        { label: 'User Retention', value: '+320%' }
+        { label: 'Target Frame Rate', value: '60 FPS' },
+        { label: 'Rendering Pipeline', value: 'Custom GLSL' },
+        { label: 'Audio Engine', value: 'WebAudio API' }
       ],
       technologies: ['Three.js', 'React', 'Next.js', 'WebAudio API', 'Tailwind CSS', 'Vite']
     }
   },
   {
     id: 'project-2',
-    title: 'Kinetix Headless Commerce',
+    title: 'E-commerce Platform',
     category: 'E-commerce',
+    status: 'Concept',
     year: '2024',
-    tagline: 'High-Conversion Headless Fashion & 3D Configurator',
-    description: 'Ultra-fast headless commerce platform engineered with interactive 3D product previews, sub-second checkout, and automated inventory synchronization.',
-    metric: '+42% conversions',
+    tagline: 'Headless storefront demo with 3D product previews & checkout',
+    description: 'A headless e-commerce demo built with Next.js, Shopify Storefront API, and Stripe, featuring interactive 3D product configurators.',
+    metric: 'Headless Architecture',
     image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop',
-    tags: ['Next.js', 'Shopify Storefront', 'Stripe', 'Tailwind', 'Three.js'],
-    liveUrl: 'https://kinetix-store.demo',
-    githubUrl: 'https://github.com/houdaifa/kinetix-commerce',
+    tags: ['Next.js', 'Shopify Storefront', 'Stripe', 'Tailwind CSS', 'Three.js'],
+    liveUrl: 'https://github.com/houdaifa',
+    githubUrl: 'https://github.com/houdaifa',
     featured: true,
     caseStudy: {
-      challenge: 'The client experienced a 4.2-second page load on their legacy monolithic platform, resulting in an alarming 68% mobile cart abandonment rate during peak drops.',
-      solution: 'Re-architected the stack to a headless Next.js setup with incremental static revalidation (ISR), edge API caching, and lightweight Three.js cloth preview modals.',
-      result: 'Cut load times from 4.2s down to 0.48s (an 88% reduction) and drove a 42% lift in completed checkout conversions in the first quarter post-launch.',
+      challenge: 'Creating a modern headless shopping experience with fluid transitions between product discovery, 3D model inspection, and instant checkout.',
+      solution: 'Integrated the Shopify Storefront GraphQL API with Next.js Server Components, client-side optimistic cart state, and a Three.js canvas viewer.',
+      result: 'Delivered an intuitive, responsive storefront prototype with sub-second page transitions and modular cart logic.',
       metrics: [
-        { label: 'Conversion Lift', value: '+42.6%' },
-        { label: 'Load Time', value: '0.48s' },
-        { label: 'Revenue Growth', value: '$1.4M ARR' }
+        { label: 'Architecture', value: 'Headless ISR' },
+        { label: 'Checkout', value: 'Stripe API' },
+        { label: '3D Preview', value: 'Three.js / GLTF' }
       ],
-      technologies: ['Next.js 14', 'TypeScript', 'Stripe Connect', 'Shopify Storefront API', 'Tailwind CSS', 'Redis']
+      technologies: ['Next.js', 'TypeScript', 'Stripe', 'Shopify Storefront API', 'Tailwind CSS']
     }
   },
   {
     id: 'project-3',
-    title: 'Aura AI Canvas Studio',
+    title: 'AI Collaboration Dashboard',
     category: 'App',
+    status: 'In Development',
     year: '2024',
-    tagline: 'Multiplayer Collaborative AI Node Orchestration Canvas',
-    description: 'A full-stack collaborative node canvas empowering engineering teams to orchestrate multi-agent LLM workflows with real-time multiplayer WebSockets.',
-    metric: '3x faster workflows',
+    tagline: 'Collaborative workflow canvas with node-based editor',
+    description: 'A full-stack collaborative canvas interface enabling real-time workflow design using WebSockets, node graphing, and responsive state management.',
+    metric: 'Real-time WebSockets',
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop',
-    tags: ['React', 'Node.js', 'WebSockets', 'Tailwind CSS', 'PostgreSQL'],
-    liveUrl: 'https://aura-canvas.demo',
-    githubUrl: 'https://github.com/houdaifa/aura-ai-studio',
+    tags: ['React', 'Node.js', 'WebSockets', 'Tailwind CSS', 'TypeScript'],
+    liveUrl: 'https://github.com/houdaifa',
+    githubUrl: 'https://github.com/houdaifa',
     caseStudy: {
-      challenge: 'Orchestrating concurrent multiplayer updates across nested workflow graphs while handling streaming responses from multiple LLMs simultaneously without UI lag.',
-      solution: 'Implemented CRDT conflict-free state resolution using Yjs with binary WebSocket protocols, offloading canvas rendering onto virtualized screen bounds.',
-      result: 'Supported up to 50 concurrent editors per collaborative room without latency spikes or cursor stuttering, speeding up team prompt automation by 3x.',
+      challenge: 'Synchronizing multi-user node graph changes and drag interactions across clients without conflicts or noticeable latency.',
+      solution: 'Implemented CRDT state synchronization paired with WebSocket broadcasting, modular node layout components, and virtualized canvas bounds.',
+      result: 'Built an interactive prototyping environment that smoothly updates connected client cursors and connections in real time.',
       metrics: [
-        { label: 'Concurrent Users', value: '50+ per room' },
-        { label: 'Socket Latency', value: '< 18ms' },
-        { label: 'Automation Speed', value: '3x faster' }
+        { label: 'Protocol', value: 'WebSockets' },
+        { label: 'State Resolution', value: 'CRDT / Yjs' },
+        { label: 'Canvas Rendering', value: 'SVG & HTML5' }
       ],
-      technologies: ['React', 'TypeScript', 'Node.js', 'Yjs', 'PostgreSQL', 'Tailwind CSS', 'Docker']
+      technologies: ['React', 'TypeScript', 'Node.js', 'WebSockets', 'Tailwind CSS']
     }
   },
   {
     id: 'project-4',
-    title: 'Hyperion Financial Terminal',
+    title: 'Financial Analytics Dashboard',
     category: 'Web',
+    status: 'Concept',
     year: '2024',
-    tagline: 'Real-Time Financial Telemetry & Dark Pool Visualizer',
-    description: 'High-frequency telemetry dashboard processing 100,000+ market events per second with high-contrast dark UI, canvas charts, and algorithmic alarms.',
-    metric: '120k events/sec',
-    image: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=1200&auto=format&fit=crop',
-    tags: ['TypeScript', 'WebGL', 'Web Workers', 'Tailwind CSS', 'Docker'],
-    liveUrl: 'https://hyperion-telemetry.demo',
-    githubUrl: 'https://github.com/houdaifa/hyperion-analytics',
+    tagline: 'High-frequency market analytics dashboard with canvas charts',
+    description: 'A dark-mode financial telemetry dashboard featuring real-time simulated order books, responsive Canvas charts, and custom data filters.',
+    metric: 'Canvas Telemetry',
+    image: 'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80&w=1200&auto=format&fit=crop',
+    tags: ['TypeScript', 'Canvas API', 'Web Workers', 'Tailwind CSS', 'D3.js'],
+    liveUrl: 'https://github.com/houdaifa',
+    githubUrl: 'https://github.com/houdaifa',
     caseStudy: {
-      challenge: 'Traditional SVG charting libraries crashed the browser under 100k events/sec with memory leaks and dropped frames during market volatility periods.',
-      solution: 'Designed a hardware-accelerated WebGL line rendering engine coupled with dedicated Web Workers to offload order-book parsing from the main UI thread.',
-      result: 'Zero memory leaks across 24-hour continuous stress testing with CPU consumption held strictly below 12%.',
+      challenge: 'Handling continuous data stream updates without blocking main thread interactions or dropping UI frame rates during rapid filter switching.',
+      solution: 'Used Web Workers for data transformation and batching, delegating rendering to an HTML5 Canvas layer instead of heavy DOM tree updates.',
+      result: 'Maintained smooth 60 FPS scrolling and snappy interactive charting throughout high-volume simulated data streams.',
       metrics: [
-        { label: 'Throughput', value: '120k events/s' },
-        { label: 'CPU Usage', value: '< 12%' },
-        { label: 'Lighthouse Score', value: '99/100' }
+        { label: 'Chart Engine', value: 'HTML5 Canvas' },
+        { label: 'Worker Threading', value: 'Web Workers' },
+        { label: 'State Updates', value: 'Batched 60Hz' }
       ],
-      technologies: ['TypeScript', 'WebGL', 'Web Workers', 'D3.js', 'Tailwind CSS']
+      technologies: ['TypeScript', 'Canvas API', 'Web Workers', 'D3.js', 'Tailwind CSS']
     }
   },
   {
     id: 'project-5',
-    title: 'Voxelverse 3D Engine',
+    title: '3D Rendering Engine',
     category: '3D',
+    status: 'In Development',
     year: '2023',
-    tagline: 'Browser-Based Procedural Voxel World & Physics Engine',
-    description: 'Fully interactive multiplayer 3D world generator running entirely inside modern web browsers with dynamic chunk streaming and spatial audio.',
-    metric: '-65% VRAM usage',
-    image: 'https://images.unsplash.com/photo-1538481199705-c710c4e965fc?q=80&w=1200&auto=format&fit=crop',
-    tags: ['Three.js', 'TypeScript', 'Web Workers', 'WebRTC', 'GLSL'],
-    liveUrl: 'https://voxelverse.demo',
-    githubUrl: 'https://github.com/houdaifa/voxelverse-web',
+    tagline: 'Browser-based procedural 3D terrain and geometry generator',
+    description: 'A procedural 3D world generator running in the browser using Three.js, chunk streaming algorithms, and Web Worker thread offloading.',
+    metric: 'Procedural Generation',
+    image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop',
+    tags: ['Three.js', 'TypeScript', 'Web Workers', 'WebGL', 'GLSL'],
+    liveUrl: 'https://github.com/houdaifa',
+    githubUrl: 'https://github.com/houdaifa',
     caseStudy: {
-      challenge: 'Managing infinite procedural terrain generation without blocking user interaction or exceeding browser memory ceilings on mid-range laptops.',
-      solution: 'Built a greedy meshing worker algorithm and octree spatial index to generate and cull terrain chunks dynamically based on camera frustum.',
-      result: 'Explorable terrain size increased by 400% while reducing overall VRAM memory footprints by 65%.',
+      challenge: 'Managing procedural voxel terrain generation in real time without causing browser stutter on standard consumer hardware.',
+      solution: 'Wrote a greedy meshing worker pipeline with frustum-based chunk culling to minimize draw calls and conserve memory.',
+      result: 'Enabled smooth exploration of dynamically generated 3D environments directly within any modern web browser.',
       metrics: [
-        { label: 'Render Distance', value: '32 chunks' },
-        { label: 'VRAM Usage', value: '-65%' },
-        { label: 'Active Gamers', value: '18,000+' }
+        { label: 'Meshing Algorithm', value: 'Greedy Meshing' },
+        { label: 'Culling Strategy', value: 'Frustum Culling' },
+        { label: 'Thread Model', value: 'Dedicated Workers' }
       ],
-      technologies: ['Three.js', 'Web Workers', 'WebRTC', 'TypeScript', 'GLSL']
+      technologies: ['Three.js', 'Web Workers', 'TypeScript', 'GLSL', 'WebGL']
     }
   },
   {
     id: 'project-6',
-    title: 'Pulse Luxury Estates',
+    title: 'Real Estate Website',
     category: 'Web',
+    status: 'Concept',
     year: '2023',
-    tagline: 'Interactive Architectural Property Showcase & 3D Tours',
-    description: 'Immersive digital experience for ultra-high-net-worth real estate developments featuring 3D floor plans, daylight simulators, and VIP inquiry vaults.',
-    metric: '$48M pipeline',
+    tagline: 'Modern architectural property showcase with interactive tours',
+    description: 'A luxury architectural portfolio website featuring smooth page transitions, interactive floor plan previews, and custom inquiry flows.',
+    metric: 'Interactive Showcase',
     image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop',
-    tags: ['Next.js', 'Three.js', 'Framer Motion', 'Tailwind CSS', 'Zod'],
-    liveUrl: 'https://pulse-luxury.demo',
-    githubUrl: 'https://github.com/houdaifa/pulse-luxury-estates',
+    tags: ['Next.js', 'Framer Motion', 'Tailwind CSS', 'TypeScript', 'Zod'],
+    liveUrl: 'https://github.com/houdaifa',
+    githubUrl: 'https://github.com/houdaifa',
     caseStudy: {
-      challenge: 'High net-worth clientele demanded a private, fluid browsing experience that matched the luxury tactile feel of visiting multi-million dollar penthouses.',
-      solution: 'Crafted cinematic WebGL camera transitions, realistic ambient occlusion materials, and bespoke micro-interactions paired with encrypted lead vaults.',
-      result: 'Facilitated over $48M in private off-market property inquiries within the first 60 days of deployment.',
+      challenge: 'Designing an editorial, high-end browsing experience that emphasizes architectural photography and interactive floor plan models.',
+      solution: 'Combined smooth Framer Motion layout transitions with responsive image optimization and accessible form validation.',
+      result: 'Produced an elegant, publication-quality real estate showcase concept optimized for all screen dimensions.',
       metrics: [
-        { label: 'Avg Time on Page', value: '5m 14s' },
-        { label: 'Lead Quality', value: '+85%' },
-        { label: 'Inquiry Volume', value: '$48M pipeline' }
+        { label: 'Animations', value: 'Framer Motion' },
+        { label: 'Form Validation', value: 'Zod & React Hook Form' },
+        { label: 'Performance', value: 'Mobile-Optimized' }
       ],
-      technologies: ['React', 'Next.js', 'Three.js', 'Framer Motion', 'Tailwind CSS']
+      technologies: ['React', 'Next.js', 'Framer Motion', 'Tailwind CSS', 'TypeScript']
     }
   }
 ];

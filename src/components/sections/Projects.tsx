@@ -114,11 +114,14 @@ const ProjectCard: React.FC<{
           {/* Subtle gradient overlay to enhance badges and contrast */}
           <div className="absolute inset-0 bg-gradient-to-t from-[#070716] via-transparent to-black/30 pointer-events-none" />
 
-          {/* Top-Left: Project Type Badge */}
-          <div className="absolute top-4 left-4 z-10">
+          {/* Top-Left: Project Type & Concept Badge */}
+          <div className="absolute top-4 left-4 z-10 flex items-center gap-2 flex-wrap">
             <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-mono font-semibold bg-[#050510]/85 backdrop-blur-md text-[#00e5ff] border border-[#00e5ff]/35 shadow-md">
               <Tag className="w-3 h-3" />
               {project.category}
+            </span>
+            <span className="inline-flex items-center px-2.5 py-1.5 rounded-full text-[11px] font-mono font-medium bg-white/[0.08] backdrop-blur-md text-[#8892b0] border border-white/10 shadow-sm">
+              {project.status || 'Concept'}
             </span>
           </div>
 
@@ -187,12 +190,11 @@ const ProjectCard: React.FC<{
             </p>
           </div>
 
-          {/* Metric Row in Cyan & Case Study Link */}
+          {/* Highlight Row & Case Study Link */}
           <div className="pt-4 border-t border-white/[0.08] flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <TrendingUp className="w-4 h-4 text-[#00e5ff]" />
-              <span className="text-xs font-mono text-white/60">Impact:</span>
-              <span className="text-xs sm:text-sm font-mono font-bold text-[#00e5ff] tracking-tight">
+              <span className="text-xs font-mono text-[#8892b0]">Focus:</span>
+              <span className="text-xs sm:text-sm font-mono font-semibold text-[#00e5ff] tracking-tight">
                 {project.metric}
               </span>
             </div>

@@ -111,9 +111,9 @@ CORE TECHNOLOGIES
 
 SELECTED RECENT HIGHLIGHTS
 --------------------------
-1. AETHER 3D — Next-gen 3D spatial web platform rendering 60 FPS WebGL shaders with interactive particle physics.
-2. HYPERION OS — High-frequency SaaS management console with real-time WebSocket telemetry and sub-50ms query latency.
-3. KRONOS LUXURY — Headless e-commerce flagship for luxury horology with interactive 3D configurator (+42.6% conversion lift).
+1. 3D Web Experience — Interactive 3D spatial web environment rendering WebGL shaders and particle physics.
+2. E-commerce Platform — Headless commerce demo built with Next.js, Shopify API, and 3D product previews.
+3. Financial Analytics Dashboard — High-frequency telemetry dashboard with dark-mode canvas charts and Web Workers.
 
 CONTACT & INQUIRIES
 -------------------
