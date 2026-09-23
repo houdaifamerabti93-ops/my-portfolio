@@ -1,5 +1,735 @@
 {
   "app": {
-    "title": "Test"
+    "title": "Houdaifa — Full-Stack Developer"
+  },
+  "nav": {
+    "brand": "HOUDAIFA",
+    "about": "About",
+    "skills": "Skills",
+    "projects": "Projects",
+    "services": "Services",
+    "pricing": "Pricing",
+    "contact": "Contact",
+    "letsTalk": "Let's Talk",
+    "a11y": {
+      "toggleMenu": "Toggle navigation menu"
+    },
+    "language": {
+      "en": "English",
+      "fr": "Français",
+      "ar": "العربية",
+      "switchLabel": "Language"
+    }
+  },
+  "hero": {
+    "headline": "Crafting Digital Experiences.",
+    "available": "Available for freelance & contract roles",
+    "subtitle": "Full-Stack Developer & Creative Coder with {{yearsHighlight}} architecting bespoke high-performance web applications, 3D WebGL interfaces, and scalable platforms.",
+    "yearsHighlight": "5+ years experience",
+    "viewWork": "View Work",
+    "hireMe": "Hire Me",
+    "stackLabel": "stack:",
+    "stackItems": ["Next.js 14+", "Three.js", "TypeScript", "Tailwind"],
+    "scroll": "Scroll",
+    "a11y": {
+      "scrollToNext": "Scroll to next section"
+    }
+  },
+  "trustedBy": {
+    "label": "Trusted by high-growth startups, scale-ups & venture-backed products",
+    "clients": [
+      { "name": "Synthetix Labs", "role": "DeFi / Web3", "logo": "SYNTHETIX" },
+      { "name": "Hyperplane AI", "role": "Machine Learning", "logo": "HYPERPLANE" },
+      { "name": "Vanguard Retail", "role": "E-Commerce", "logo": "VANGUARD" },
+      { "name": "Aetheria Studios", "role": "Creative 3D", "logo": "AETHERIA" },
+      { "name": "Quantum Core", "role": "Fintech Protocol", "logo": "QUANTUM" },
+      { "name": "Nebula Ventures", "role": "Tech Incubator", "logo": "NEBULA" }
+    ]
+  },
+  "about": {
+    "label": "01 / ABOUT ME",
+    "headingPrefix": "Hi, I'm",
+    "name": "Houdaifa",
+    "subheading": "Full-Stack Developer & Creative Coder",
+    "paragraphs": [
+      "I'm a full-stack developer with over 5 years of hands-on experience building scalable, production-grade web applications. I bridge the gap between robust backend architectures and highly intuitive user interfaces, helping founders and engineering teams transform ambitious ideas into high-impact digital reality.",
+      "I have a deep love for fast, modern, and immersive web experiences. Whether optimizing Node.js APIs for extreme throughput or choreographing 60 FPS Three.js graphics, I obsess over performance, clean type safety, and technical craftsmanship that leaves a lasting impression."
+    ],
+    "photoAlt": "Houdaifa — Full-Stack Developer",
+    "badgeFullStack": "Full-Stack",
+    "badgeAvailable": "Available for work",
+    "locationLabel": "Location",
+    "locationValue": "Worldwide (Remote)",
+    "specialtyLabel": "Specialty",
+    "specialtyValue": "Full-Stack & 3D Web",
+    "responseTimeLabel": "Response Time",
+    "responseTimeValue": "< 24 Hours",
+    "coreTechnologiesLabel": "Core Technologies",
+    "focusTags": ["React", "Next.js", "TypeScript", "Node.js", "Three.js"],
+    "downloadCV": "Download CV",
+    "letsTalk": "Let's Talk",
+    "stats": {
+      "projects": "Projects Completed",
+      "clients": "Happy Clients",
+      "years": "Years Experience",
+      "satisfaction": "Satisfaction"
+    },
+    "cv": {
+      "filename": "Houdaifa_FullStack_Developer_CV.txt",
+      "content": "=====================================================\nHOUDAIFA — FULL-STACK DEVELOPER & CREATIVE CODER\n=====================================================\nEmail: houdaifamerabti93@gmail.com\nPhone/WhatsApp: +213773018738\nStatus: Available for Full-Stack, Contract & Bespoke 3D Web Projects\nPortfolio: https://houdaifa.dev\n\nPROFESSIONAL SUMMARY\n--------------------\nAccomplished Full-Stack Developer with 5+ years of experience engineering high-performance web applications, resilient backend architectures, and immersive 3D/WebGL experiences.\n\nKEY STATISTICS\n--------------\n• 50+ Projects Successfully Completed\n• 30+ Happy Clients Worldwide\n• 5+ Years Industry Experience\n• 100% Client Satisfaction & Delivery Rate\n\nCORE TECHNOLOGIES\n-----------------\n• Frontend: React 19, Next.js 14/15, TypeScript, Tailwind CSS, Three.js, WebGL, Motion\n• Backend: Node.js, Express, PostgreSQL, REST APIs, GraphQL, Redis, Cloud Run\n• Architecture: Headless Architecture, Microservices, Edge CDN, Responsive Systems, Performance Optimization (95+ Core Web Vitals)\n\nSELECTED RECENT HIGHLIGHTS\n--------------------------\n1. 3D Web Experience — Interactive 3D spatial web environment rendering WebGL shaders and particle physics.\n2. E-commerce Platform — Headless commerce demo built with Next.js, Shopify API, and 3D product previews.\n3. Financial Analytics Dashboard — High-frequency telemetry dashboard with dark-mode canvas charts and Web Workers.\n\nCONTACT & INQUIRIES\n-------------------\nDirect Email: houdaifamerabti93@gmail.com\nCalendly: 15-minute introductory technical discovery call available\n====================================================="
+    }
+  },
+  "services": {
+    "label": "02 / Capabilities & Offerings",
+    "title": "Modern web services for ambitious projects.",
+    "subtitle": "Every project includes full IP ownership, optimized performance, and 1 month of free post-launch support.",
+    "investmentLabel": "Investment",
+    "startingFrom": "Starting from {{price}}",
+    "items": [
+      {
+        "id": "web-dev",
+        "title": "Web Development (React / Next.js)",
+        "description": "Bespoke web applications built with modern architectures, clean component modularity, enterprise TypeScript, and resilient state management designed to scale effortlessly.",
+        "deliverables": [
+          "Custom Next.js / React Architecture",
+          "Server Actions & Edge Rendering",
+          "Full Responsive & Mobile First",
+          "Bulletproof TypeScript Codebase"
+        ],
+        "startingPrice": "$800",
+        "timeline": "Custom timeline"
+      },
+      {
+        "id": "ecommerce",
+        "title": "E-commerce & Storefronts",
+        "description": "Blazing-fast headless commerce experiences engineered for maximum conversion, dynamic cart interactions, Stripe / Shopify integration, and 3D product visualizers.",
+        "deliverables": [
+          "Headless Shopify / Medusa / Stripe",
+          "Sub-second Checkout Flow",
+          "Inventory & Analytics Hookups",
+          "3D Interactive Product Viewers"
+        ],
+        "startingPrice": "$1,200",
+        "timeline": "Custom timeline"
+      },
+      {
+        "id": "landing-pages",
+        "title": "Landing Pages & Creative UI",
+        "description": "Awwwards-level storytelling landing pages packed with magnetic physics, custom WebGL / Three.js 3D elements, micro-interactions, and persuasive copy alignment.",
+        "deliverables": [
+          "Custom 3D / WebGL Hero Canvas",
+          "Scroll-Triggered Micro-Interactions",
+          "Interactive Calculators / Demos",
+          "Guaranteed 95+ Lighthouse Score"
+        ],
+        "startingPrice": "$500",
+        "timeline": "Custom timeline"
+      }
+    ]
+  },
+  "skills": {
+    "label": "03 / Technical Weaponry",
+    "title": "Modern tech stack engineered for speed & scale.",
+    "categories": {
+      "all": "All",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "creative3d": "Creative 3D",
+      "devops": "DevOps & Tools"
+    },
+    "items": [
+      {
+        "id": "react-next",
+        "name": "React 19 / Next.js 14+",
+        "category": "Frontend",
+        "highlight": "App Router, Server Components & Suspense"
+      },
+      {
+        "id": "typescript",
+        "name": "TypeScript",
+        "category": "Frontend",
+        "highlight": "Strict Type-Safety & Generic Architectures"
+      },
+      {
+        "id": "threejs",
+        "name": "Three.js & WebGL",
+        "category": "Creative 3D",
+        "highlight": "Custom Shaders, Lighting & Particle Meshes"
+      },
+      {
+        "id": "tailwind",
+        "name": "Tailwind CSS v4",
+        "category": "Frontend",
+        "highlight": "Modern JIT & Responsive Dark-Futuristic Layouts"
+      },
+      {
+        "id": "gsap",
+        "name": "GSAP & ScrollTrigger",
+        "category": "Creative 3D",
+        "highlight": "Awwwards-Level Physics & Timeline Sequences"
+      },
+      {
+        "id": "node",
+        "name": "Node.js & Express",
+        "category": "Backend",
+        "highlight": "Scalable Microservices, Auth & Stream Pipelines"
+      },
+      {
+        "id": "postgres",
+        "name": "PostgreSQL & Supabase",
+        "category": "Backend",
+        "highlight": "Complex Schemas, Indexing & High-Speed Queries"
+      },
+      {
+        "id": "mongodb",
+        "name": "MongoDB",
+        "category": "Backend",
+        "highlight": "Document Stores & Flexible Data Aggregations"
+      },
+      {
+        "id": "docker",
+        "name": "Docker & DevOps",
+        "category": "DevOps & Tools",
+        "highlight": "Containerization, CI/CD & Cloud Deployments"
+      },
+      {
+        "id": "git",
+        "name": "Git & GitHub",
+        "category": "DevOps & Tools",
+        "highlight": "Monorepos, Branching Strategies & PR Workflows"
+      },
+      {
+        "id": "figma",
+        "name": "Figma",
+        "category": "Creative 3D",
+        "highlight": "UI/UX Prototyping, Tokens & Design Systems"
+      },
+      {
+        "id": "websockets",
+        "name": "WebSockets & WebRTC",
+        "category": "Backend",
+        "highlight": "Low-Latency Multiplayer & Audio/Video Streams"
+      }
+    ],
+    "marquee": [
+      { "name": "Next.js", "symbol": "▲" },
+      { "name": "Three.js", "symbol": "◈" },
+      { "name": "TypeScript", "symbol": "TS" },
+      { "name": "React", "symbol": "⚛" },
+      { "name": "Tailwind CSS", "symbol": "≋" },
+      { "name": "WebGL", "symbol": "⬡" },
+      { "name": "Node.js", "symbol": "⬢" },
+      { "name": "PostgreSQL", "symbol": "🐘" },
+      { "name": "Docker", "symbol": "🐳" },
+      { "name": "GSAP", "symbol": "⚡" },
+      { "name": "Figma", "symbol": "❖" },
+      { "name": "Vercel", "symbol": "▲" }
+    ]
+  },
+  "projects": {
+    "label": "04 / SELECTED WORKS",
+    "title": "Featured projects & case studies.",
+    "subtitle": "A selection of recent work — from landing pages to full-stack apps.",
+    "tabs": {
+      "all": "All",
+      "3d": "3D",
+      "web": "Web",
+      "app": "App",
+      "ecommerce": "E-commerce"
+    },
+    "statusFallback": "Concept",
+    "live": "Live",
+    "github": "GitHub",
+    "focusLabel": "Focus:",
+    "caseStudy": "Case Study",
+    "viewAll": {
+      "title": "View all projects",
+      "description": "Explore 50+ archived repositories, open-source experiments, WebGL playgrounds, and private enterprise client systems.",
+      "cta": "Explore Archive (50+)"
+    },
+    "items": [
+      {
+        "id": "project-1",
+        "title": "3D Web Experience",
+        "category": "3D",
+        "status": "Concept",
+        "year": "2025",
+        "tagline": "Interactive 3D spatial computing environment & WebGL showcase",
+        "description": "An interactive 3D web experiment featuring particle physics, custom GLSL shaders, and audio-reactive elements built with Three.js and React.",
+        "metric": "WebGL & Shaders",
+        "tags": ["Three.js", "React", "TypeScript", "GLSL", "WebAudio"],
+        "caseStudy": {
+          "challenge": "Rendering instanced particles and spatial audio in the browser while maintaining a consistent 60 FPS across both desktop and mobile viewports.",
+          "solution": "Constructed custom WebGL vertex and fragment shaders using off-screen render targets and instanced buffer geometries with LOD fallbacks.",
+          "result": "Achieved smooth, fluid animations and responsive touch interactions without overheating or memory degradation.",
+          "metrics": [
+            { "label": "Target Frame Rate", "value": "60 FPS" },
+            { "label": "Rendering Pipeline", "value": "Custom GLSL" },
+            { "label": "Audio Engine", "value": "WebAudio API" }
+          ],
+          "technologies": ["Three.js", "React", "Next.js", "WebAudio API", "Tailwind CSS", "Vite"]
+        }
+      },
+      {
+        "id": "project-2",
+        "title": "E-commerce Platform",
+        "category": "E-commerce",
+        "status": "Concept",
+        "year": "2024",
+        "tagline": "Headless storefront demo with 3D product previews & checkout",
+        "description": "A headless e-commerce demo built with Next.js, Shopify Storefront API, and Stripe, featuring interactive 3D product configurators.",
+        "metric": "Headless Architecture",
+        "tags": ["Next.js", "Shopify Storefront", "Stripe", "Tailwind CSS", "Three.js"],
+        "caseStudy": {
+          "challenge": "Creating a modern headless shopping experience with fluid transitions between product discovery, 3D model inspection, and instant checkout.",
+          "solution": "Integrated the Shopify Storefront GraphQL API with Next.js Server Components, client-side optimistic cart state, and a Three.js canvas viewer.",
+          "result": "Delivered an intuitive, responsive storefront prototype with sub-second page transitions and modular cart logic.",
+          "metrics": [
+            { "label": "Architecture", "value": "Headless ISR" },
+            { "label": "Checkout", "value": "Stripe API" },
+            { "label": "3D Preview", "value": "Three.js / GLTF" }
+          ],
+          "technologies": ["Next.js", "TypeScript", "Stripe", "Shopify Storefront API", "Tailwind CSS"]
+        }
+      },
+      {
+        "id": "project-3",
+        "title": "AI Collaboration Dashboard",
+        "category": "App",
+        "status": "In Development",
+        "year": "2024",
+        "tagline": "Collaborative workflow canvas with node-based editor",
+        "description": "A full-stack collaborative canvas interface enabling real-time workflow design using WebSockets, node graphing, and responsive state management.",
+        "metric": "Real-time WebSockets",
+        "tags": ["React", "Node.js", "WebSockets", "Tailwind CSS", "TypeScript"],
+        "caseStudy": {
+          "challenge": "Synchronizing multi-user node graph changes and drag interactions across clients without conflicts or noticeable latency.",
+          "solution": "Implemented CRDT state synchronization paired with WebSocket broadcasting, modular node layout components, and virtualized canvas bounds.",
+          "result": "Built an interactive prototyping environment that smoothly updates connected client cursors and connections in real time.",
+          "metrics": [
+            { "label": "Protocol", "value": "WebSockets" },
+            { "label": "State Resolution", "value": "CRDT / Yjs" },
+            { "label": "Canvas Rendering", "value": "SVG & HTML5" }
+          ],
+          "technologies": ["React", "TypeScript", "Node.js", "WebSockets", "Tailwind CSS"]
+        }
+      },
+      {
+        "id": "project-4",
+        "title": "Financial Analytics Dashboard",
+        "category": "Web",
+        "status": "Concept",
+        "year": "2024",
+        "tagline": "High-frequency market analytics dashboard with canvas charts",
+        "description": "A dark-mode financial telemetry dashboard featuring real-time simulated order books, responsive Canvas charts, and custom data filters.",
+        "metric": "Canvas Telemetry",
+        "tags": ["TypeScript", "Canvas API", "Web Workers", "Tailwind CSS", "D3.js"],
+        "caseStudy": {
+          "challenge": "Handling continuous data stream updates without blocking main thread interactions or dropping UI frame rates during rapid filter switching.",
+          "solution": "Used Web Workers for data transformation and batching, delegating rendering to an HTML5 Canvas layer instead of heavy DOM tree updates.",
+          "result": "Maintained smooth 60 FPS scrolling and snappy interactive charting throughout high-volume simulated data streams.",
+          "metrics": [
+            { "label": "Chart Engine", "value": "HTML5 Canvas" },
+            { "label": "Worker Threading", "value": "Web Workers" },
+            { "label": "State Updates", "value": "Batched 60Hz" }
+          ],
+          "technologies": ["TypeScript", "Canvas API", "Web Workers", "D3.js", "Tailwind CSS"]
+        }
+      },
+      {
+        "id": "project-5",
+        "title": "3D Rendering Engine",
+        "category": "3D",
+        "status": "In Development",
+        "year": "2023",
+        "tagline": "Browser-based procedural 3D terrain and geometry generator",
+        "description": "A procedural 3D world generator running in the browser using Three.js, chunk streaming algorithms, and Web Worker thread offloading.",
+        "metric": "Procedural Generation",
+        "tags": ["Three.js", "TypeScript", "Web Workers", "WebGL", "GLSL"],
+        "caseStudy": {
+          "challenge": "Managing procedural voxel terrain generation in real time without causing browser stutter on standard consumer hardware.",
+          "solution": "Wrote a greedy meshing worker pipeline with frustum-based chunk culling to minimize draw calls and conserve memory.",
+          "result": "Enabled smooth exploration of dynamically generated 3D environments directly within any modern web browser.",
+          "metrics": [
+            { "label": "Meshing Algorithm", "value": "Greedy Meshing" },
+            { "label": "Culling Strategy", "value": "Frustum Culling" },
+            { "label": "Thread Model", "value": "Dedicated Workers" }
+          ],
+          "technologies": ["Three.js", "Web Workers", "TypeScript", "GLSL", "WebGL"]
+        }
+      },
+      {
+        "id": "project-6",
+        "title": "Real Estate Website",
+        "category": "Web",
+        "status": "Concept",
+        "year": "2023",
+        "tagline": "Modern architectural property showcase with interactive tours",
+        "description": "A luxury architectural portfolio website featuring smooth page transitions, interactive floor plan previews, and custom inquiry flows.",
+        "metric": "Interactive Showcase",
+        "tags": ["Next.js", "Framer Motion", "Tailwind CSS", "TypeScript", "Zod"],
+        "caseStudy": {
+          "challenge": "Designing an editorial, high-end browsing experience that emphasizes architectural photography and interactive floor plan models.",
+          "solution": "Combined smooth Framer Motion layout transitions with responsive image optimization and accessible form validation.",
+          "result": "Produced an elegant, publication-quality real estate showcase concept optimized for all screen dimensions.",
+          "metrics": [
+            { "label": "Animations", "value": "Framer Motion" },
+            { "label": "Form Validation", "value": "Zod & React Hook Form" },
+            { "label": "Performance", "value": "Mobile-Optimized" }
+          ],
+          "technologies": ["React", "Next.js", "Framer Motion", "Tailwind CSS", "TypeScript"]
+        }
+      }
+    ]
+  },
+  "process": {
+    "label": "05 / Method & Execution",
+    "title": "The blueprint to flawless execution.",
+    "subtitle": "A transparent four-phase framework engineered to eliminate guesswork, respect hard deadlines, and guarantee Awwwards-worthy deliverables.",
+    "steps": [
+      {
+        "number": "01",
+        "title": "Discovery & Strategy",
+        "phase": "Week 1",
+        "description": "Aligning business objectives, technical scope, brand visual targets, and 3D architectural feasibility to create a strict sprint roadmap.",
+        "deliverables": [
+          "Technical Architecture Spec",
+          "Asset & 3D Audit",
+          "Sprint Milestone Schedule"
+        ]
+      },
+      {
+        "number": "02",
+        "title": "Design & Prototyping",
+        "phase": "Week 1–2",
+        "description": "Crafting pixel-perfect Figma prototypes, interactive WebGL lighting studies, custom motion curves, and typographic systems.",
+        "deliverables": [
+          "Figma Design System",
+          "Interactive Motion Specs",
+          "Responsive Grid Layouts"
+        ]
+      },
+      {
+        "number": "03",
+        "title": "Develop & Polish",
+        "phase": "Week 2–3",
+        "description": "Writing type-safe Next.js / React components, Three.js shaders, resilient API integrations, and executing performance stress testing.",
+        "deliverables": [
+          "TypeScript Modular Code",
+          "Three.js 60 FPS Engine",
+          "Micro-Interactions & Audio"
+        ]
+      },
+      {
+        "number": "04",
+        "title": "Deploy & Scale",
+        "phase": "Week 4",
+        "description": "Deploying to edge CDNs (Vercel / Cloud Run), auditing 95+ Core Web Vitals, configuring DNS, and handing over clean documentation.",
+        "deliverables": [
+          "Lighthouse 95+ Certification",
+          "Production DNS & SSL",
+          "30-Day Post-Launch Warranty"
+        ]
+      }
+    ]
+  },
+  "testimonials": {
+    "label": "06 / Client Endorsements",
+    "title": "Words from founders & tech leaders.",
+    "subtitle": "Direct feedback from entrepreneurs and executives who trusted my engineering to scale their vision.",
+    "a11y": {
+      "previous": "Previous testimonial",
+      "next": "Next testimonial",
+      "goTo": "Go to testimonial {{index}}"
+    },
+    "items": [
+      {
+        "id": "test-1",
+        "name": "Alexander Sterling",
+        "role": "Founder & CEO",
+        "company": "Synthetix Capital",
+        "content": "Houdaifa delivered an experience that felt like it arrived from 2030. Our investors and users were blown away by the 3D interactions and sub-second load times. He is in the top 1% of creative engineers globally.",
+        "projectType": "Web3 & Financial Telemetry"
+      },
+      {
+        "id": "test-2",
+        "name": "Elena Rostova",
+        "role": "Head of Brand & Product",
+        "company": "Kinetix Global Apparel",
+        "content": "Working with Houdaifa was effortless. He took our high-fashion brand concept and elevated it beyond anything we imagined. Conversion rates jumped by 42% in our very first week post-launch.",
+        "projectType": "Headless E-Commerce & 3D"
+      },
+      {
+        "id": "test-3",
+        "name": "Marcus Vance",
+        "role": "VP of Engineering",
+        "company": "Hyperplane AI",
+        "content": "Not only is his design taste impeccable, but his engineering fundamentals are bulletproof. Flawless TypeScript, clean component architecture, and 60 FPS WebGL rendering without memory leaks.",
+        "projectType": "Multiplayer AI Studio"
+      },
+      {
+        "id": "test-4",
+        "name": "Sophia Chen",
+        "role": "Managing Director",
+        "company": "Pulse Architecture Group",
+        "content": "Our luxury estate clients demand perfection. Houdaifa built a showcase that directly closed over $48M in private property negotiations. Worth every single penny.",
+        "projectType": "3D Luxury Real Estate Platform"
+      }
+    ]
+  },
+  "pricing": {
+    "label": "07 / Investment Tiers",
+    "title": "Transparent, value-driven pricing.",
+    "subtitle": "No ambiguous hourly billings. Fixed transparent scope, agreed milestones, and full intellectual property ownership.",
+    "mostPopular": "Most Popular",
+    "whatsIncluded": "What's Included:",
+    "periodPrefix": "/",
+    "tiers": [
+      {
+        "id": "starter",
+        "name": "Starter Sprint",
+        "badge": "Single Page / MVP",
+        "price": "$2,400",
+        "period": "per project",
+        "description": "Perfect for startups, product launches, or founders needing an Awwwards-worthy landing page to impress investors and capture leads.",
+        "features": [
+          "High-impact single-page landing site",
+          "Interactive 3D or WebGL hero canvas",
+          "Smooth Lenis scrolling & micro-interactions",
+          "Framer Motion UI animations",
+          "Contact form with instant email alerts",
+          "Full mobile responsiveness & SEO setup",
+          "1–2 weeks delivery turnaround",
+          "2 rounds of revisions"
+        ],
+        "ctaText": "Choose Starter"
+      },
+      {
+        "id": "pro",
+        "name": "Full-Stack Pro",
+        "badge": "Most Popular",
+        "price": "$4,800",
+        "period": "per project",
+        "description": "Comprehensive full-stack web application or headless e-commerce experience with custom backend architecture and rich 3D interactions.",
+        "features": [
+          "Up to 6 custom designed pages/views",
+          "Advanced Three.js 3D scenes & shaders",
+          "Full-stack Next.js / React + Node.js backend",
+          "PostgreSQL / Supabase / Redis integration",
+          "Stripe or Payment gateway setup",
+          "Role-based authentication & analytics",
+          "Performance audit (95+ Lighthouse guaranteed)",
+          "3–4 weeks delivery turnaround",
+          "30 days dedicated post-launch support"
+        ],
+        "ctaText": "Get Started with Pro"
+      },
+      {
+        "id": "custom",
+        "name": "Enterprise Bespoke",
+        "badge": "Custom Architecture",
+        "price": "Custom",
+        "period": "quote tailored",
+        "description": "For organizations seeking bespoke creative technology, spatial 3D WebOS platforms, real-time multiplayer applications, or dedicated retainer engineering.",
+        "features": [
+          "Unlimited scope & custom architecture",
+          "Custom WebGL / GLSL shaders & physics engine",
+          "Real-time WebSockets & collaborative multiplayer",
+          "Enterprise cloud deployment & Docker configs",
+          "Design system & component documentation",
+          "Weekly sprint demos & direct Slack access",
+          "Flexible timeline & priority queuing",
+          "NDA & intellectual property guarantee"
+        ],
+        "ctaText": "Schedule Architecture Call"
+      }
+    ],
+    "budgetPrefill": {
+      "starter": "$2k–$5k",
+      "pro": "$5k–$10k",
+      "custom": "$10k+"
+    }
+  },
+  "faq": {
+    "label": "08 / Common Inquiries",
+    "title": "Frequently asked questions.",
+    "subtitle": "Everything you need to know about working together, communication cadences, and development standards.",
+    "cta": {
+      "title": "Have a unique technical challenge?",
+      "description": "I respond to all custom inquiries within 24 hours.",
+      "button": "Ask a Question Directly"
+    },
+    "items": [
+      {
+        "question": "What is your typical project delivery timeline?",
+        "answer": "Timeline depends on project scope and technical requirements. A high-impact 3D landing page typically takes 1–2 weeks, while a full-scale web application or headless e-commerce build generally ranges between 3–5 weeks. I work on strict sprint milestones so you always know where we stand."
+      },
+      {
+        "question": "How does your pricing and payment schedule work?",
+        "answer": "Projects are scoped at fixed transparent pricing so there are never surprise billings. Typically, we operate on a 50% deposit upon kickoff and 50% upon final delivery, testing, and deployment to your production domain. Custom milestone splits (33/33/34) are also available for larger custom projects."
+      },
+      {
+        "question": "How do you ensure 3D and WebGL experiences run fast on mobile phones?",
+        "answer": "Performance is engineered from the first line of code. I write low-overhead instanced geometries, cap pixel ratios (dpr) strictly to 2.0, throttle physics updates when out of viewport, implement WebGL draw-call batching, and supply graceful CSS/2D fallbacks for battery saver or low-power hardware."
+      },
+      {
+        "question": "Can you work with my existing Figma design or design team?",
+        "answer": "Absolutely. I frequently partner with design agencies, in-house product teams, or independent creative directors to translate Figma, Spline, or Cinema4D designs into clean, production-ready code down to the single pixel and frame."
+      },
+      {
+        "question": "What is included in post-launch support and revisions?",
+        "answer": "All projects include 2–3 rounds of targeted revisions during development, followed by 14 to 30 days of comprehensive post-launch warranty support. This covers bug fixes, browser compatibility checks, and DNS/deployment assistance."
+      },
+      {
+        "question": "What tech stack do you recommend for high-performance web applications?",
+        "answer": "My primary stack is Next.js 14+ (or React 19 + Vite for ultra-fast SPA setups), TypeScript, Tailwind CSS, Three.js with custom GLSL shaders, GSAP/Motion for fluid physics, and Node.js / PostgreSQL / Supabase for backend services. This combination delivers unbeatable Lighthouse metrics and modern interactive prowess."
+      },
+      {
+        "question": "Are you available for ongoing monthly engineering retainers?",
+        "answer": "Yes! For established startups and scale-ups needing continuous product development, design engineering sprints, and performance maintenance, I offer fractional creative engineering retainers with dedicated weekly hours and priority Slack response."
+      }
+    ]
+  },
+  "contact": {
+    "label": "09 / Initiate Collaboration",
+    "title": "Let's build something unforgettable.",
+    "subtitle": "Whether you have a fully scoped design ready for development or an early-stage concept seeking 3D creative direction, my inbox is open.",
+    "fastResponse": {
+      "title": "Fast Turnaround & Response",
+      "description": "Guaranteed response within 12–24 business hours."
+    },
+    "timezoneLabel": "Timezone",
+    "timezoneValue": "Worldwide / Remote Friendly",
+    "directEmailLabel": "Direct Email Inquiries",
+    "copy": "Copy",
+    "copied": "Copied!",
+    "emailTitle": "Send email to Houdaifa",
+    "bookCall": {
+      "title": "Book Intro Call",
+      "description": "15-min discovery & technical fit call"
+    },
+    "whatsapp": {
+      "title": "WhatsApp Chat",
+      "description": "Instant text for urgent project quotes",
+      "button": "Chat on WhatsApp",
+      "prefillText": "Hi Houdaifa, I'd like to discuss a project"
+    },
+    "guarantee": "Strict NDA protection & complete code ownership upon delivery.",
+    "form": {
+      "nameLabel": "Your Name",
+      "emailLabel": "Email Address",
+      "subjectLabel": "Subject",
+      "subjectOptional": "(optional)",
+      "projectNatureLabel": "Project Nature",
+      "budgetLabel": "Anticipated Budget",
+      "messageLabel": "Project Goals & Scope",
+      "requiredMark": "*",
+      "placeholders": {
+        "name": "e.g. Alex Morgan",
+        "email": "name@company.com",
+        "subject": "e.g. Next.js Web App Redesign",
+        "message": "Tell me about your product, desired launch timeline, and key requirements..."
+      },
+      "projectTypes": [
+        { "value": "Web Development (React / Next.js)", "label": "Web Development (React / Next.js)" },
+        { "value": "E-commerce & Storefronts", "label": "E-commerce & Storefronts" },
+        { "value": "Landing Pages & Creative UI", "label": "Landing Pages & Creative UI" },
+        { "value": "Custom Bespoke Engineering", "label": "Custom Bespoke Engineering" }
+      ],
+      "budgets": [
+        { "value": "$2k–$5k", "label": "$2,000 – $5,000" },
+        { "value": "$5k–$10k", "label": "$5,000 – $10,000" },
+        { "value": "$10k–$25k", "label": "$10,000 – $25,000" },
+        { "value": "$25k+", "label": "$25,000+ (Enterprise)" }
+      ],
+      "defaults": {
+        "projectType": "Web Development (React / Next.js)",
+        "budget": "$5k–$10k"
+      },
+      "submit": "Submit Project Proposal",
+      "sending": "Sending...",
+      "orDirectChat": "Or direct chat"
+    },
+    "validation": {
+      "nameRequired": "Please enter your name",
+      "nameMinLength": "Name must be at least 2 characters",
+      "emailRequired": "Please provide your email address",
+      "emailInvalid": "Please enter a valid email format",
+      "messageRequired": "Please provide details about your project",
+      "messageMinLength": "Message must be at least 10 characters"
+    },
+    "success": {
+      "title": "Message sent! I'll get back to you soon.",
+      "description": "Thank you for reaching out. Your proposal has been dispatched directly to my inbox. Expect a response within 12–24 business hours.",
+      "sendAnother": "Send Another Message"
+    },
+    "error": {
+      "default": "Something went wrong. Please try WhatsApp instead."
+    },
+    "emailPayload": {
+      "subjectFallback": "New project inquiry from {{name}}",
+      "fromName": "Portfolio Contact Form",
+      "lines": {
+        "senderName": "Sender Name:",
+        "senderEmail": "Sender Email:",
+        "projectNature": "Project Nature:",
+        "anticipatedBudget": "Anticipated Budget:",
+        "subject": "Subject:",
+        "messageHeader": "--- Message Content ---"
+      }
+    },
+    "a11y": {
+      "copyEmail": "Copy email address"
+    }
+  },
+  "footer": {
+    "brand": "HOUDAIFA",
+    "tagline": "Freelance Full-Stack Developer & Creative Coder crafting next-generation 3D web platforms, high-performance web applications, and immersive digital brand experiences.",
+    "availabilityBadge": "Available for Select Q3/Q4 Projects",
+    "exploreTitle": "Explore",
+    "links": {
+      "aboutStory": "About Story",
+      "techStack": "Tech Stack",
+      "featuredProjects": "Featured Projects",
+      "servicesCapabilities": "Services & Capabilities",
+      "pricingEngagement": "Pricing & Engagement"
+    },
+    "connectTitle": "Connect",
+    "location": "Remote / Worldwide",
+    "social": {
+      "github": "GitHub",
+      "twitter": "Twitter",
+      "linkedin": "LinkedIn",
+      "dribbble": "Dribbble"
+    },
+    "copyright": "© 2026 HOUDAIFA. Built with",
+    "copyrightSuffix": "using Next.js 14, Three.js & Tailwind CSS.",
+    "backToTop": "Back to top",
+    "a11y": {
+      "backToTop": "Back to top"
+    }
+  },
+  "preloader": {
+    "brand": "HOUDAIFA",
+    "status": {
+      "initializing": "INITIALIZING ENVIRONMENT",
+      "environment3d": "INITIALIZING 3D ENVIRONMENT",
+      "compiling": "COMPILING GLSL SHADERS & PARTICLES",
+      "hydrating": "HYDRATING ASSETS & TYPOGRAPHY",
+      "ready": "EXPERIENCE READY"
+    }
+  },
+  "modal": {
+    "livePreview": "Live Preview",
+    "github": "GitHub",
+    "projectOverview": "Project Overview",
+    "challenge": "Challenge",
+    "solution": "Solution",
+    "result": "Result",
+    "techStackLabel": "Tech Stack:",
+    "statusFallback": "Concept",
+    "a11y": {
+      "close": "Close modal"
+    }
   }
 }
