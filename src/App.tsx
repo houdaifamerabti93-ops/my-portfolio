@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import Lenis from 'lenis';
 import { Preloader } from './components/effects/Preloader';
 import { CustomCursor } from './components/effects/CustomCursor';
@@ -21,9 +22,16 @@ import { Project, PricingTier } from './types';
 import { Analytics } from '@vercel/analytics/react';
 
 export default function App() {
+  const { t, i18n } = useTranslation();
   const [loading, setLoading] = useState(true);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [activeSection, setActiveSection] = useState<string>('hero');
+
+  // Sync document language and direction
+  useEffect(() => {
+    document.documentElement.lang = i18n.language || 'en';
+    document.documentElement.dir = i18n.language?.startsWith('ar') ? 'rtl' : 'ltr';
+  }, [i18n.language]);
 
   // Initialize Lenis smooth scroll
   useEffect(() => {
@@ -79,7 +87,11 @@ export default function App() {
   }, [loading]);
 
   return (
-    <div className="relative min-h-screen bg-[#050510] text-[#eaf2ff] selection:bg-[#00e5ff]/30 selection:text-[#00e5ff] overflow-x-hidden">
+    <div
+      data-i18n-status="active"
+      data-i18n-test={t('app.title')}
+      className="relative min-h-screen bg-[#050510] text-[#eaf2ff] selection:bg-[#00e5ff]/30 selection:text-[#00e5ff] overflow-x-hidden"
+    >
       {/* 1. Preloader */}
       {loading && <Preloader onComplete={() => setLoading(false)} />}
 
